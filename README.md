@@ -1,0 +1,2 @@
+# Smauksteliai
+Universiteto projektas
