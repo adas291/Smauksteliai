@@ -1,0 +1,148 @@
+#@(#) script.ddl
+
+DROP TABLE IF EXISTS STOP_TIME;
+DROP TABLE IF EXISTS TRIP;
+DROP TABLE IF EXISTS LOCATION;
+DROP TABLE IF EXISTS VEHICLE;
+DROP TABLE IF EXISTS DRIVER_QUALIFICATION;
+DROP TABLE IF EXISTS TRANSPORT_TYPE;
+DROP TABLE IF EXISTS STOP;
+DROP TABLE IF EXISTS STATE;
+DROP TABLE IF EXISTS SERVICE;
+DROP TABLE IF EXISTS ROUTE;
+DROP TABLE IF EXISTS QUALIFICATION;
+DROP TABLE IF EXISTS DRIVER;
+CREATE TABLE DRIVER
+(
+	id int,
+	name varchar (255),
+	surname varchar (255),
+	age int,
+	employment_date date,
+	mobile_phone varchar (255),
+	email varchar (255),
+	additional_comments varchar (255),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE QUALIFICATION
+(
+	id int,
+	type varchar (255),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE ROUTE
+(
+	id varchar (255),
+	short_route_id varchar (255),
+	distance int,
+	start_stop int,
+	end_stop int,
+	route_url varchar (255),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE SERVICE
+(
+	id int,
+	monday boolean,
+	tuesday boolean,
+	wednesday boolean,
+	thursday boolean,
+	friday boolean,
+	saturday boolean,
+	sunday boolean,
+	start_date date,
+	end_date date,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE STATE
+(
+	id varchar (255),
+	name varchar (255),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE STOP
+(
+	id int,
+	url varchar (255),
+	stop_name varchar (255),
+	lat double precision,
+	lon double precision,
+	has_timetable boolean,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE TRANSPORT_TYPE
+(
+	id int,
+	name varchar (255),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE DRIVER_QUALIFICATION
+(
+	fk_DRIVER_id int,
+	fk_QUALIFICATION_id int,
+	PRIMARY KEY(fk_DRIVER_id, fk_QUALIFICATION_id),
+	FOREIGN KEY(fk_DRIVER_id) REFERENCES DRIVER (id),
+	FOREIGN KEY(fk_QUALIFICATION_id) REFERENCES QUALIFICATION (id)
+);
+
+CREATE TABLE VEHICLE
+(
+	id int,
+	manufacture_date date,
+	model varchar (255),
+	passangers_count int,
+	additional_comments varchar (255),
+	fk_STATE_id varchar (255) NOT NULL,
+	fk_TRANSPORT_TYPE_id int NOT NULL,
+	PRIMARY KEY(id),
+	CONSTRAINT is_at FOREIGN KEY(fk_STATE_id) REFERENCES STATE (id),
+	CONSTRAINT has1 FOREIGN KEY(fk_TRANSPORT_TYPE_id) REFERENCES TRANSPORT_TYPE (id)
+);
+
+CREATE TABLE LOCATION
+(
+	id int,
+	longitude double precision,
+	latitude double precision,
+	azimuth double precision,
+	speed double precision,
+	deviation_from_timetable int,
+	fk_VEHICLE_id int NOT NULL,
+	PRIMARY KEY(id),
+	CONSTRAINT is_currently_at FOREIGN KEY(fk_VEHICLE_id) REFERENCES VEHICLE (id)
+);
+
+CREATE TABLE TRIP
+(
+	id int,
+	fk_SERVICE_id int NOT NULL,
+	fk_DRIVER_id int NOT NULL,
+	fk_ROUTE_id varchar (255) NOT NULL,
+	fk_VEHICLE_id int NOT NULL,
+	PRIMARY KEY(id),
+	CONSTRAINT is_scheduled_by FOREIGN KEY(fk_SERVICE_id) REFERENCES SERVICE (id),
+	CONSTRAINT is_responsible_for FOREIGN KEY(fk_DRIVER_id) REFERENCES DRIVER (id),
+	CONSTRAINT follows_by FOREIGN KEY(fk_ROUTE_id) REFERENCES ROUTE (id),
+	CONSTRAINT is_included_in FOREIGN KEY(fk_VEHICLE_id) REFERENCES VEHICLE (id)
+);
+
+CREATE TABLE STOP_TIME
+(
+	id int,
+	arrival_time int,
+	departure_time int,
+	trip_sequence int,
+	convered_distance int,
+	fk_STOP_id int NOT NULL,
+	fk_TRIP_id int NOT NULL,
+	PRIMARY KEY(id),
+	CONSTRAINT is_is visited_at FOREIGN KEY(fk_STOP_id) REFERENCES STOP (id),
+	CONSTRAINT is_organized_according FOREIGN KEY(fk_TRIP_id) REFERENCES TRIP (id)
+);
