@@ -10,12 +10,18 @@
 	<body>
         <nav>
             <ul>
-                <li>Create new project</li>
+                <li><a href="Home.html">Home</a></li>
+                <li class="current"><a href="Project.html">Project</a></li>
+                <li><a href="User.html">User</a></li>
+                <li><a href="Settings.html">Settings</a></li>
             </ul>
         </nav>
-		<label for="fname">Project name:</label>
-		<input type="text" id="pname" value="Enter project name" />
-		
+		<form method="post">
+			<label for="pname">Project name:</label> <br>
+			<input type="text" id="pname" placeholder="Enter project name" />
+			<br>
+			<input class="firstB" type="submit" value="Create project" />
+		</form>
 
 	</body>
 </html>
