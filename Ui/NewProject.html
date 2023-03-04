@@ -19,7 +19,29 @@
 		<form method="post">
 			<label for="pname">Project name:</label> <br>
 			<input type="text" id="pname" placeholder="Enter project name" />
-			<br>
+			<br><br>
+			<label for="startdate">Start date:</label> <br>
+            <input type="date" id="startdate" name="startdate">
+			<br><br>
+			<label for="enddate">End date:</label> <br>
+            <input type="date" id="enddate" name="enddate">
+			<br><br>
+			<label for="hperproject">Academic hours per project:</label> <br>
+			<input type="text" id="hperproject" placeholder="Enter number of hours" />
+			<br><br>
+			<label for="hpersession">Academic hours per session:</label> <br>
+			<input type="text" id="hpersession" placeholder="Enter number of hours" />
+			<br><br>
+			<label for="newness">How new the project is:</label> <br>
+            <select name="newness" id="newness">
+                <option value="new">New</option>
+                <option value="mix">Mix</option>
+                <option value="inprogress">In Progress</option>
+            </select>
+            <br><br> 
+			<label for="city">City:</label> <br>
+	    	<input type="text" id="city" placeholder="Enter the city" />
+            <br>
 			<input class="firstB" type="submit" value="Create project" />
 		</form>
 
