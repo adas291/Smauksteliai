@@ -12,7 +12,7 @@
     border-collapse: collapse;
 }
 nav {
-    width: 100%;
+    margin: 1% 1%;
     /* height: 50vh; */
     background-color: var(--primary-color);
 }
@@ -50,10 +50,6 @@ ul li a {
 
 }
 
-.firstB {
-    margin-top: 30px;
-}
-
 ul li:hover {
     /* color: var(--secondary-color); */
     border-style: solid;
@@ -86,4 +82,7 @@ button:hover {
 button a:hover {
     border-width: 3px;
     border-color: black;
+}
+.buttons{
+    margin: 20px 1%;
 }
