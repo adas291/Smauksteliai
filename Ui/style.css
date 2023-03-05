@@ -20,12 +20,16 @@ nav {
 body {
     background-color: var(--background-color);
 }
-
 form {
     padding: 20px 20px;
 }
 .current {
     background-color: var(--secondary-color);
+}
+img{
+    float: left;
+    width: 70px;
+    height: 70px;
 }
 
 nav ul {
@@ -50,9 +54,7 @@ nav ul li a {
 }
 
 nav ul li:hover {
-    /* color: var(--secondary-color); */
-    border-style: solid;
-    border-color: black;
+    background-color: var(--secondary-color);
 }
 
 button {
@@ -87,12 +89,4 @@ button a:hover {
 }
 .teach {
     visibility: hidden;
-}
-.title{
-    display: block;
-    text-decoration: none;
-    font-size: 25px;
-    font-family: Arial;
-    color: var(--text-color);
-    padding: 0 20px;
 }
