@@ -1,9 +1,9 @@
 <?php
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dataBase = "ona";
+$host = "db4free.net";
+$dbname = "ona_test";
+$username = "smauksteliai";
+$password = "smauksteliai";
 
 $conn = new mysqli($host, $username, $password, $dataBase);
 
