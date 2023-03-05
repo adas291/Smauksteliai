@@ -61,11 +61,6 @@ CREATE TABLE ROOM
 	PRIMARY KEY(title)
 );
 
-CREATE TABLE STATE
-(
-	id_STATE integer PRIMARY KEY auto_increment
-);
-
 CREATE TABLE TEACHING_MATERIAL
 (
 	id int PRIMARY KEY auto_increment,
