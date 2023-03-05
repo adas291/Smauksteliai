@@ -61,14 +61,37 @@
             </div>
             <br>
             <label for="role">Select role:</label> <br>
-            <select name="role" id="role" name="role">
+            <select name="role" id="role" name="role" onchange="addTeacher()">
                 <option value="">Select role</option>
                 <option value="teacher">Teacher</option>
-                <option value="client">Client</option>
+                <option value="student">Client</option>
+                <option value="manager">Manager</option>
             </select>
             <br><br>
+            <div class="teach" id="teach">
+                <label for="qualification">Qualification:</label> <br>
+		        <input type="text" id="qualification" name="qualification" placeholder="Enter qualification" />
+                <br><br>
+                <label for="price">Price:</label> <br>
+		        <input type="text" id="price" name="price" placeholder="Enter price" />
+                <br><br>
+            </div>
             <input class="firstB" type="submit" value="Create user" />
         </form>
+        <script class="forTeacher">
+            function addTeacher()
+            {
+                var status = document.getElementById("role");
+                if(status.value == "teacher")
+                {
+                    document.getElementById("teach").style.visibility="visible";
+                }
+                else
+                {
+                    document.getElementById("teach").style.visibility="hidden";
+                }
+            }
+        </script>
 
         <script>
             var user_country_code = "LT";
