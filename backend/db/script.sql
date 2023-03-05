@@ -111,7 +111,7 @@ CREATE TABLE SEX
 CREATE TABLE MEMBER
 (
 	id int PRIMARY KEY AUTO_INCREMENT,
-	name varchar (255),
+	fname varchar (255),
 	surname varchar (255),
 	birth_day date,
 	phone_number varchar(20),
@@ -120,7 +120,7 @@ CREATE TABLE MEMBER
 	city varchar (255),
 	sex integer,
 	fk_ROLE_name varchar (255) NOT NULL,
-	fk_CLIENT_id integer NOT NULL,
+	fk_CLIENT_id integer NULL,
 	FOREIGN KEY(sex) REFERENCES SEX (id_SEX),
 	CONSTRAINT is_part_of FOREIGN KEY(fk_ROLE_name) REFERENCES ROLE (name),
 	CONSTRAINT belongs_for FOREIGN KEY(fk_CLIENT_id) REFERENCES CLIENT (id)
