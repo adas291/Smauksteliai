@@ -113,7 +113,7 @@ CREATE TABLE MEMBER
 	id int PRIMARY KEY AUTO_INCREMENT,
 	name varchar (255),
 	surname varchar (255),
-	age smallint,
+	birth_day date,
 	phone_number varchar(20),
 	country varchar (255),
 	email varchar (255),
