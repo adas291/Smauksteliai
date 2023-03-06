@@ -12,7 +12,9 @@
 
 <body>
     <nav>
+		<img src="../Images/Logo.png" alt="logo">
         <ul>
+			<li class="menuButton"><a href="./Project.php">Back</a></li>
             <li><a>Create new project</a></li>
         </ul>
     </nav>

@@ -11,11 +11,8 @@
         <nav>
             <img src="../Images/Logo.png" alt="logo">
             <ul>
-                <li class="menuButton"><a href="../Home.php">Home</a></li>
-                <li class="current"><a href="Project.php">Project</a></li>
-                <li class="menuButton"><a href="../User/User.php">User</a></li>
-                <li class="menuButton"><a href="../Client/Client.php">Client</a></li>
-                <li class="menuButton"><a href="../Settings.php">Settings</a></li>
+                <li class="menuButton"><a href="./Project.php">Back</a></li>
+                <li><a>View projects</a></li>
             </ul>
         </nav>
         </nav>

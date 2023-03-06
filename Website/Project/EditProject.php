@@ -9,10 +9,16 @@
 	</head>
 	<body>
         <nav>
+            <img src="../Images/Logo.png" alt="logo">
             <ul>
 				<li class="menuButton"><a href="./Project.php">Back</a></li>
                 <li><a>Edit project</a></li>
             </ul>
         </nav>
+        <form action="" method="post">
+            <label for="pname">Project name:</label> <br>
+            <input name="title" type="text" id="pname" placeholder="Enter project name" />
+            <br>
+        </form>
     </body>
 </html>
