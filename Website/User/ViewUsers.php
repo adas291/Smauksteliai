@@ -17,11 +17,10 @@
             </ul>
         </nav>
         </nav>
-
+        <table class="table">
         <?php
             $result = $conn->query("SELECT fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id FROM MEMBER");
-
-            echo "<table>";
+            
                 echo "<tr><th>Name</th><th>Surname</th><th>Birth date</th><th>Phone number</th><th>Country</th><th>Email</th><th>City</th><th>Sex</th><th>Role</th><th>Client</th></tr>";
                 while ($row = mysqli_fetch_assoc($result)) {
                     $sex_ID = $row["sex"];
@@ -46,7 +45,7 @@
                     }
                     
                 }
-            echo "</table>";
         ?>
+        </table>
     </body>
 </html>

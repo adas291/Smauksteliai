@@ -23,8 +23,7 @@
             <br />
             <button><a href="EditUser.php">Edit user</a></button>
             <br />
-            <button><a href="ViewUsers.php">View user</a></button>        
+            <button><a href="ViewUsers.php">View users</a></button>        
         </div>
-        
 	</body>
 </html>
