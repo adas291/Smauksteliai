@@ -19,7 +19,7 @@
     
     else
     {
-        $sql = "INSERT INTO MEMBER (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role', '$client')";
+    $sql = "INSERT INTO MEMBER (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role', '$client')";
     }
 
     $conn->query($sql) or die($conn->error);
