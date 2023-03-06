@@ -62,9 +62,9 @@
             <br>
             <label for="role">Select role:</label> <br>
             <select name="role" id="role" name="role" onchange="addTeacher()">
-                <option value="">Select role</option>
+                <option value="ro">Select role</option>
                 <option value="teacher">Teacher</option>
-                <option value="student">Client</option>
+                <option value="student">Student</option>
                 <option value="manager">Manager</option>
             </select>
             <br><br>
@@ -76,6 +76,11 @@
 		        <input type="text" id="price" name="price" placeholder="Enter price" />
                 <br><br>
             </div>
+            <div class="stud" id="stud">
+                <label for="client">Client:</label> <br>
+		        <input type="text" id="client" name="client" placeholder="Enter client" />
+                <br><br>
+            </div>
             <input class="firstB" type="submit" value="Create user" />
         </form>
         <script class="forTeacher">
@@ -85,10 +90,17 @@
                 if(status.value == "teacher")
                 {
                     document.getElementById("teach").style.visibility="visible";
+                    document.getElementById("stud").style.visibility="hidden";
+                }
+                else if(status.value == "student")
+                {
+                    document.getElementById("teach").style.visibility="hidden";
+                    document.getElementById("stud").style.visibility="visible";
                 }
                 else
                 {
                     document.getElementById("teach").style.visibility="hidden";
+                    document.getElementById("stud").style.visibility="hidden";
                 }
             }
         </script>
