@@ -11,13 +11,14 @@
 	</head>
 	<body>
         <nav>
+            <img src="../Images/Logo.png" alt="logo">
             <ul>
                 <li class="menuButton"><a href="./Client.php">Back</a></li>
                 <li><a>View Clients</a></li>
             </ul>
         </nav>
         <table>
-            
+
         </table>
 	</body>
 </html>

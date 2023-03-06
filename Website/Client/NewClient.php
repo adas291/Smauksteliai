@@ -11,6 +11,7 @@
 	</head>
 	<body>
         <nav>
+            <img src="../Images/Logo.png" alt="logo">
             <ul>
                 <li class="menuButton"><a href="./Client.php">Back</a></li>
                 <li><a>Create new client</a></li>
