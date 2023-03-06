@@ -11,17 +11,17 @@
         <nav>
             <img src="../Images/Logo.png" alt="logo">
             <ul>
-                <li><a href="../Home.html">Home</a></li>
-                <li><a href="../Project/Project.html">Project</a></li>
-                <li class="current"><a href="User.html">User</a></li>
-                <li><a href="../Client/Client.html">Client</a></li>
-                <li><a href="../Settings.html">Settings</a></li>
+                <li><a href="../Home.php">Home</a></li>
+                <li><a href="../Project/Project.php">Project</a></li>
+                <li class="current"><a href="User.php">User</a></li>
+                <li><a href="../Client/Client.php">Client</a></li>
+                <li><a href="../Settings.php">Settings</a></li>
             </ul>
         </nav>
         <div class="buttons">
-            <button class="firstB"><a href="NewUser.html">Create new user</a></button> 
+            <button class="firstB"><a href="NewUser.php">Create new user</a></button> 
             <br />
-            <button><a href="ViewUsers.html">View Users</a></button>    
+            <button><a href="ViewUsers.php">View Users</a></button>    
         </div>
         
 	</body>

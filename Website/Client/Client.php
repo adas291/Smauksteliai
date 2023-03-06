@@ -11,15 +11,15 @@
         <nav>
             <img src="../Images/Logo.png" alt="logo">
             <ul>
-                <li><a href="../Home.html">Home</a></li>
-                <li><a href="../Project/Project.html">Project</a></li>
-                <li><a href="../User/User.html">User</a></li>
-                <li class="current"><a href="Client.html">Client</a></li>
-                <li><a href="../Settings.html">Settings</a></li>
+                <li><a href="../Home.php">Home</a></li>
+                <li><a href="../Project/Project.php">Project</a></li>
+                <li><a href="../User/User.php">User</a></li>
+                <li class="current"><a href="Client.php">Client</a></li>
+                <li><a href="../Settings.php">Settings</a></li>
             </ul>
         </nav>
         <div class="buttons">
-            <button class="firstB"><a href="NewClient.html">Create new client</a></button>   
+            <button class="firstB"><a href="NewClient.php">Create new client</a></button>   
         </div>
         
 	</body>

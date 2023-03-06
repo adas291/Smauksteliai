@@ -72,9 +72,9 @@
                 <label for="qualification">Qualification:</label> <br>
 		        <input type="text" id="qualification" name="qualification" placeholder="Enter qualification" />
                 <br><br>
-                <label for="price">Price:</label> <br>
+                <!--<label for="price">Price:</label> <br>
 		        <input type="text" id="price" name="price" placeholder="Enter price" />
-                <br><br>
+                <br><br>-->
             </div>
             <div class="stud" id="stud">
                 <label for="client">Client:</label> <br>

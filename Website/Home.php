@@ -11,11 +11,11 @@
         <nav>
             <img src="./Images/Logo.png" alt="logo" width="80" height="80">
             <ul>
-                <li class="current"><a href="Home.html">Home</a></li>
-                <li><a href="./Project/Project.html">Project</a></li>
-                <li><a href="./User/User.html">User</a></li>
-                <li><a href="./Client/Client.html">Client</a></li>
-                <li><a href="Settings.html">Settings</a></li>
+                <li class="current"><a href="Home.php">Home</a></li>
+                <li><a href="./Project/Project.php">Project</a></li>
+                <li><a href="./User/User.php">User</a></li>
+                <li><a href="./Client/Client.php">Client</a></li>
+                <li><a href="Settings.php">Settings</a></li>
                 <li><a href="#">MoreIfNeeded</a></li>
             </ul>
         </nav>
