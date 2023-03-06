@@ -7,6 +7,7 @@
 		<title>NewUserPage</title>
         <link rel="stylesheet" href="../style.css">
         <script src="../Data/Countries-cities/country-states.js"></script>
+        <?php include_once '../Includes/Connect.php'; ?>
 	</head>
 	<body>
         <nav>
@@ -14,26 +15,31 @@
                 <li><a>Create new User</a></li>
             </ul>
         </nav>
-        <form method="post">
+        <form method="post" action="../Includes/NewUserAdd.php">
 		    <label for="fname">User first name:</label> <br>
-		    <input type="text" id="fname" name="firstName" placeholder="Enter users first name" />
+		    <input type="text" id="fname" name="fname" placeholder="Enter users first name" />
             <br><br>
             <label for="lname">User last name:</label> <br>
-		    <input type="text" id="lname" name="lastName" placeholder="Enter users last name" />
+		    <input type="text" id="lname" name="lname" placeholder="Enter users last name" />
             <br><br>
             <label for="sex">Select sex:</label> <br>
-            <select name="sex" id="sex" name="sex">
-                <option value="">Select sex</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
+            <?php
+                $sql = "SELECT id_SEX, name FROM SEX";
+
+                $result = $conn->query($sql) or die($conn->error);
+
+                echo "<select name='sex'>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='".$row['id_SEX']."'>".$row['name']."</option>";
+                }
+                echo "</select>";
+            ?>
             <br><br>    
             <label for="birthdate">Users birthday:</label> <br>
-            <input type="date" id="birthdate" name="birthDate">
+            <input type="date" id="birthdate" name="bday">
 		    <br><br>
             <label for="pnumber">Phone number:</label> <br>
-		    <input type="tel" id="pnumber" name="phoneNumber" value="+370" />
+		    <input type="tel" id="pnumber" name="pnumber" value="+370" />
             <br><br>
             <label for="email">Email:</label> <br>
 		    <input type="text" id="email" name="email" placeholder="example@email.com" />
@@ -54,19 +60,24 @@
                 <div>
                     <label for="state">State:</label>
                     <br>
-                    <select id="state" name="state">
+                    <select id="state" name="city">
                         <option>_</option>
                     </select>
                 </div>
             </div>
             <br>
             <label for="role">Select role:</label> <br>
-            <select name="role" id="role" name="role" onchange="addTeacher()">
-                <option value="ro">Select role</option>
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
-                <option value="manager">Manager</option>
-            </select>
+            <?php
+                $sql = "SELECT name FROM ROLE";
+
+                $result = $conn->query($sql) or die($conn->error);
+
+                echo "<select name='role'>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='".$row['name']."'>".$row['name']."</option>";
+                }
+                echo "</select>";
+            ?>
             <br><br>
             <div class="teach" id="teach">
                 <label for="qualification">Qualification:</label> <br>
@@ -78,7 +89,18 @@
             </div>
             <div class="stud" id="stud">
                 <label for="client">Client:</label> <br>
-		        <input type="text" id="client" name="client" placeholder="Enter client" />
+		        <?php
+                $sql = "SELECT id, name FROM CLIENT";
+
+                $result = $conn->query($sql) or die($conn->error);
+
+                echo "<select name='client'>";
+                echo "<option value='-'>-</option>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                }
+                echo "</select>";
+                ?>
                 <br><br>
             </div>
             <input class="firstB" type="submit" value="Create user" />

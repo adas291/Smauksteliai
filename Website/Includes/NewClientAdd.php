@@ -6,10 +6,10 @@
     $manager = $_POST['manager'];
 
 
-    $sql = "INSERT INTO client (name, additional_info, manager_id) VALUES ('$name', '$additional', '$manager')";
+    $sql = "INSERT INTO CLIENT (name, additional_info, manager_id) VALUES ('$name', '$additional', '$manager')";
 
     $conn->query($sql) or die($conn->error);
 
 
-    header("Location: ../NewClient.php?status=succes");
+    header("Location: ../Client/NewClient.php?status=succes");
 ?>

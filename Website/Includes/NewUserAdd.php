@@ -14,12 +14,12 @@
 
     if ($client == '-') 
     {
-        $sql = "INSERT INTO member (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role')";
+        $sql = "INSERT INTO MEMBER (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role')";
     }
     
     else
     {
-        $sql = "INSERT INTO member (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role', '$client')";
+        $sql = "INSERT INTO MEMBER (fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id) VALUES ('$fname', '$lname', '$bday', '$pnumber', '$country', '$email', '$city', '$sex', '$role', '$client')";
     }
 
     $conn->query($sql) or die($conn->error);
@@ -28,9 +28,9 @@
 
     if ($role == 'teacher')
     {
-        $sql = "INSERT INTO teacher (fk_MEMBER_id) VALUES ('$memberID')";
+        $sql = "INSERT INTO TEACHER (fk_MEMBER_id) VALUES ('$memberID')";
         $conn->query($sql) or die($conn->error);
     }
 
-    header("Location: ../NewUser.php?status=succes");
+    header("Location: ../User/NewUser.php?status=succes");
 ?>
