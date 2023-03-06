@@ -93,3 +93,29 @@ button a:hover {
 .stud {
     visibility: hidden;
 }
+
+
+.loginImgContainer {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+img.loginLogo {
+    width: 15%;
+    height: 15%;
+}
+.loginInputContainer {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+.loginInput{
+    text-align: center;
+    padding: 10px;
+    margin: 12px 0;
+   
+}
