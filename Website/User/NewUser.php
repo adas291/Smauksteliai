@@ -12,6 +12,7 @@
 	<body>
         <nav>
             <ul>
+                <li class="menuButton"><a href="./User.php">Back</a></li>
                 <li><a>Create new User</a></li>
             </ul>
         </nav>
@@ -72,7 +73,7 @@
 
                 $result = $conn->query($sql) or die($conn->error);
 
-                echo "<select name='role'>";
+                echo "<select name='role' id='role' onchange='addTeacher()'>";
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<option value='".$row['name']."'>".$row['name']."</option>";
                 }
