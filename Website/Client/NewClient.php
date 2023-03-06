@@ -12,6 +12,7 @@
 	<body>
         <nav>
             <ul>
+                <li class="menuButton"><a href="./Client.php">Back</a></li>
                 <li><a>Create new client</a></li>
             </ul>
         </nav>
