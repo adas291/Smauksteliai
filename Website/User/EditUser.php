@@ -10,6 +10,7 @@
 	</head>
 	<body>
         <nav>
+			<img src="../Images/Logo.png" alt="logo">
             <ul>
 				<li class="menuButton"><a href="./User.php">Back</a></li>
                 <li><a>Edit user</a></li>
