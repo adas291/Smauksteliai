@@ -19,8 +19,8 @@
         </ul>
     </nav>
     <form action="NewProjectAdd.php" method="post">
-        <label for="pname">Project name:</label> <br>
-        <input name="title" type="text" id="pname" placeholder="Enter project name" />
+        <label for="pname">Project's name:</label> <br>
+        <input name="title" type="text" id="pname" placeholder="Enter project's name" />
         <br>
         <br>
         <label for="subject">Subject: </label>
@@ -39,9 +39,7 @@
         echo "</select>";
 
         ?>
-        <br>
-        <br>
-
+        <br><br>
         <label for="">Assign manager:</label> <br>
         <?php
         $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
@@ -56,7 +54,6 @@
         echo "</select>";
 
         ?>
-
         <br><br>
         <label for="">Teaching material: </label> <br>
         <?php
@@ -72,12 +69,7 @@
 
         echo "</select>";
         ?>
-
         <br><br>
-
-
-        <br>
-        <br>
         <label for="city">City:</label> <br>
         <!-- <input type="text" id="city" name="city" placeholder="Enter city" /> -->
 
@@ -156,8 +148,9 @@
         <br><br>
         <label for="">Additional comments</label>
         <br>
-        <input type="text" name="comments" />
-        <br>
+		<textarea name="comments" id="comments" cols="30" rows="5" placeholder="Enter text here..."></textarea>
+        <!-- <input type="text" rows="4" size="30" name="comments" /> -->
+        <br><br>
         <input class="firstB" type="submit" value="Create project" />
     </form>
 
