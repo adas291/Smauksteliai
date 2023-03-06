@@ -19,7 +19,9 @@
             </ul>
         </nav>
         <div class="buttons">
-            <button class="firstB"><a href="NewClient.php">Create new client</a></button>   
+            <button class="firstB"><a href="NewClient.php">Create new client</a></button>  
+            <br />
+            <button><a href="ViewClients.php">View clients</a></button> 
         </div>
         
 	</body>

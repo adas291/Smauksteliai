@@ -21,7 +21,8 @@
 		    <input type="text" id="name" name="name" placeholder="Enter client's name" />
             <br><br>
             <label for="additional">Additional info:</label> <br>
-		    <input type="text" id="additional" name="additional" placeholder="Write additional info" />
+		    <!--<input type="text" id="additional" name="additional" placeholder="Write additional info" /> -->
+            <textarea name="additional" id="additional" cols="30" rows="5" placeholder="Enter text here..."></textarea>
             <br><br>
             <label for="manager">Select manager:</label> <br>
             <?php
