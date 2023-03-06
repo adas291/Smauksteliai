@@ -5,7 +5,7 @@ $dbname = "ona_test";
 $username = "smauksteliai";
 $password = "smauksteliai";
 
-$conn = new mysqli($host, $username, $password, $dataBase);
+$conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn -> connect_errno) {
