@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>NewUserPage</title>
-        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../styles.css">
         <script src="../Data/Countries-cities/country-states.js"></script>
         <?php include_once '../Includes/Connect.php'; ?>
 	</head>
@@ -74,7 +74,7 @@
 
                 $result = $conn->query($sql) or die($conn->error);
 
-                echo "<select name='role' id='role' onchange='addTeacher()'>";
+                echo "<select name='role' id='role'>";
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<option value='".$row['name']."'>".$row['name']."</option>";
                 }
@@ -107,26 +107,28 @@
             </div>
             <input class="firstB" type="submit" value="Create user" />
         </form>
-        <script class="forTeacher">
-            function addTeacher()
-            {
-                var status = document.getElementById("role");
-                if(status.value == "teacher")
-                {
-                    document.getElementById("teach").style.visibility="visible";
-                    document.getElementById("stud").style.visibility="hidden";
-                }
-                else if(status.value == "student")
-                {
-                    document.getElementById("teach").style.visibility="hidden";
-                    document.getElementById("stud").style.visibility="visible";
-                }
-                else
-                {
-                    document.getElementById("teach").style.visibility="hidden";
-                    document.getElementById("stud").style.visibility="hidden";
-                }
-            }
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('#role').on('change', function() {
+                    if ( this.value == 'teacher')
+                    {
+                        $("#stud").hide();
+                        $("#teach").show();
+                    }
+                    else  if ( this.value == 'student')
+                    {
+                        $("#teach").hide();
+                        $("#stud").show();
+                    }
+                    else  
+                    {
+                        $("#teach").hide();
+                        $("#stud").hide();
+                    }
+                });
+            });
         </script>
 
         <script>
@@ -164,7 +166,7 @@
                     option += '<select name="state">';
                     option += '<option>Select state</option>';
                     for (let i = 0; i < state_names.length; i++) {
-                        option += '<option value="'+state_names[i].code+'">'+state_names[i].name+'</option>';
+                        option += '<option value="'+state_names[i].name+'">'+state_names[i].name+'</option>';
                     }
                     option += '</select>';
                     id_state_option.innerHTML = option;
