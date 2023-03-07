@@ -19,31 +19,28 @@
         </nav>
         <table class="table">
         <?php
-            $result = $conn->query("SELECT fname, surname, birth_day, phone_number, country, email, city, sex, fk_ROLE_name, fk_CLIENT_id FROM MEMBER");
-            
+                $sql = "SELECT fname, surname, birth_day, phone_number, country, email, city, SEX.name as 'sex', fk_ROLE_name, CLIENT.name as 'client' FROM MEMBER
+                JOIN SEX on MEMBER.sex = SEX.id_SEX
+                LEFT JOIN CLIENT on MEMBER.fk_CLIENT_id = CLIENT.id";
+
+                $result = $conn->query($sql);
+
                 echo "<tr><th>Name</th><th>Surname</th><th>Birth date</th><th>Phone number</th><th>Email</th><th>Country</th><th>City</th><th>Sex</th><th>Role</th><th>Client</th></tr>";
+
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $sex_ID = $row["sex"];
-                    $sex_result = $conn->query("SELECT name FROM SEX WHERE id_SEX='$sex_ID'");
-                    $sex = $sex_result->fetch_assoc();
 
-                    $client_ID = $row["fk_CLIENT_id"];
-
-                    if ($client_ID)
+                    if ($row['client'])
                     {
-                        $client_result = $conn->query("SELECT name FROM CLIENT WHERE id='$client_ID'");
-                        $client = $client_result->fetch_assoc();
     
                         echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                              .$row["city"]."</td><td>".$sex["name"]."</td><td>".$row["fk_ROLE_name"]."</td><td>".$client["name"]."</td></tr>";
+                              .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td>".$row["client"]."</td></tr>";
                     }
                     
                     else
                     {
                         echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                              .$row["city"]."</td><td>".$sex["name"]."</td><td>".$row["fk_ROLE_name"]."</td><td></td></tr>";
+                              .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td></td></tr>";
                     }
-                    
                 }
         ?>
         </table>
