@@ -34,7 +34,7 @@
 
                         while ($row = mysqli_fetch_assoc($result)) {
             
-                                echo "<tr><td>".$row["name"]."</td><td>".$row["additional_info"]."</td><td>".$row["manager"]."</td></tr>";
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["additional_info"]."</td><td>".$row["manager"]."</td><td><a href='./EditClient.php'>edit</a></td></tr>";
                         }
                 ?>
             </tbody>
