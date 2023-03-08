@@ -21,8 +21,6 @@
         <div class="buttons">
             <button class="firstB"><a href="NewProject.php">Create new project</a></button>
             <br />
-            <button><a href="EditProject.php">Edit project</a></button>
-            <br />
             <button><a href="ViewProjects.php">View projects</a></button>      
         </div>
 	</body>

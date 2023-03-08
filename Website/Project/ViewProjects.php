@@ -27,6 +27,7 @@
                 <th>State</th>
                 <th>City</th>
                 <th>Manager</th>
+                <th></th>
             </tr>
             <tbody id="body">
                 <?php
@@ -39,8 +40,7 @@
                     $result = $conn->query($query);
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<tr id="' . $row['id'] . '">' . 
-                        '<td>' . $row['title'] . '</td><td>' .  $row['state']. '</td><td>' . $row['city'] . '</td><td>' . $row['manager'] . '</td>' .
-                        '</tr>';
+                        '<td>' . $row['title'] . '</td><td>' .  $row['state']. '</td><td>' . $row['city'] . '</td><td>' . $row['manager'] . '</td><td><a href="./EditProject.php">edit</a></td></tr>';
                     }
                 ?>
             </tbody>
