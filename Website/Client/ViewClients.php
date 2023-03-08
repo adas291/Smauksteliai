@@ -26,7 +26,17 @@
                 <th>Manager</th>
             </thead>
             <tbody class="body">
+                <?php
+                        $sql = "SELECT CLIENT.name, CLIENT.additional_info, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' FROM CLIENT
+                        JOIN MEMBER on MEMBER.id = CLIENT.manager_id";
 
+                        $result = $conn->query($sql);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+            
+                                echo "<tr><td>".$row["name"]."</td><td>".$row["additional_info"]."</td><td>".$row["manager"]."</td></tr>";
+                        }
+                ?>
             </tbody>
         </table>
         <script>
