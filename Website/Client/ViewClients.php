@@ -25,7 +25,7 @@
                 <th>Additional info</th>
                 <th>Manager</th>
             </thead>
-            <tbody class="body">
+            <tbody id="body">
                 <?php
                         $sql = "SELECT CLIENT.name, CLIENT.additional_info, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' FROM CLIENT
                         JOIN MEMBER on MEMBER.id = CLIENT.manager_id";
