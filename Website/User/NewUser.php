@@ -5,8 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>NewUserPage</title>
-        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
         <script src="../Data/Countries-cities/country-states.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <?php include_once '../Includes/Connect.php'; ?>
 	</head>
 	<body>
@@ -107,8 +108,6 @@
             </div>
             <input class="firstB" type="submit" value="Create user" />
         </form>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-        </script>
         <script>
             $(document).ready(function(){
                 $('#role').on('change', function() {

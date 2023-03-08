@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>NewClientPage</title>
-        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
         <script src="../Data/Countries-cities/country-states.js"></script>
 	</head>
 	<body>
@@ -38,7 +38,7 @@
                 echo "</select>";
             ?>
             <br><br>
-            <input class="firstB" type="submit" value="Create user" />
+            <input class="firstB" type="submit" value="Create client" />
         </form>
 	</body>
 </html>
