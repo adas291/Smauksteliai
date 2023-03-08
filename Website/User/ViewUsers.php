@@ -31,6 +31,7 @@
                 <th>Sex</th>
                 <th>Role</th>
                 <th>Client</th>
+                <th></th>
             </thead>
             <tbody id="body">
                 <?php
@@ -46,13 +47,13 @@
                             {
             
                                 echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td>".$row["client"]."</td></tr>";
+                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td>".$row["client"]."</td><td><a href='./EditUser.php'>edit</a></td></tr>";
                             }
                             
                             else
                             {
                                 echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td></td></tr>";
+                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td></td><td><a href='./EditUser.php'>edit</a></td></tr>";
                             }
                         }
                 ?>
