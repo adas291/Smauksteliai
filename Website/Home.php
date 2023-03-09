@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>HomePage</title>
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
+        <link href="http://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 	</head>
 	<body>
         <nav>
@@ -19,5 +20,6 @@
                 <li class="menuButton"><a href="#">MoreIfNeeded</a></li>
             </ul>
         </nav>
+        <button class="btn-minecraft">Press</button>
 	</body>
 </html>
