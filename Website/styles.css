@@ -82,12 +82,9 @@ button a {
     color: var(--text-color);
 }
 
-button:hover {
+.menubutton:hover {
     background-color: var(--secondary-color);
-}
-button a:hover {
-    border-width: 3px;
-    border-color: black;
+    color: var(--text-color);
 }
 .buttons{
     margin: 20px 1%;
