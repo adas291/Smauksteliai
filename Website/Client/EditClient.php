@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <?php include_once '../Includes/Connect.php'; ?>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>EditClientPage</title>
+        <!-- Links -->
         <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
+        <?php include_once '../Includes/Connect.php'; ?>
 	</head>
 	<body>
         <nav>
@@ -39,5 +40,7 @@
             <br><br>
             <input class="firstB" type="submit" value="Save changes" />
         </form>
+
+        <!-- Scripts -->
     </body>
 </html>

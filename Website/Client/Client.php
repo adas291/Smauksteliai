@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ClientPage</title>
+        <!-- Links -->
         <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
 	</head>
 	<body>
@@ -24,5 +25,6 @@
             <button><a href="ViewClients.php">View clients</a></button> 
         </div>
         
+        <!-- Scripts -->
 	</body>
 </html>

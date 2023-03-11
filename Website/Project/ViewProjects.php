@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ViewProjectsPage</title>
+    <!-- Links -->
     <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
     <?php include '../Includes/Connect.php' ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -44,17 +45,10 @@
                     }
                 ?>
             </tbody>
-            <script>
-            $(document).ready(function(){
-                $("#searchBar").on("keyup",function(){
-                  var value= $(this).val().toLowerCase();
-                  $("#body tr").filter(function(){
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                  });
-                });
-            });
-        </script>
     </table>
+
+    <!-- Scripts -->
+    <script src="../Scripts/TableSearch.js"></script>
 </body>
 
 </html>
