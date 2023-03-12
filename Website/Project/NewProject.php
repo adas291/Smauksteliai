@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NewProjectPage</title>
+    <!-- Links -->
     <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
     <?php include '../Includes/Connect.php'; ?>
 </head>
@@ -154,6 +155,7 @@
         <input class="firstB" type="submit" value="Create project" />
     </form>
 
-</body>
+    <!-- Scripts -->
 
+</body>
 </html>

@@ -3,6 +3,7 @@
 
 <head>
     <?php include '../Includes/Connect.php';
+    
     $query = "SELECT * FROM PROJECT WHERE id = " . $_GET['id'];
     $result = $conn->query($query);
     $old_row = $result->fetch_assoc();
@@ -241,6 +242,9 @@
         <br>
         <input class="firstB" type="submit" value="Save changes" />
     </form>
+
+    <!-- Scripts -->
+    </body>
 </body>
 
 </html>

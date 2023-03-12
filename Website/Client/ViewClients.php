@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <?php include_once '../Includes/Connect.php'; ?>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ViewClientsPage</title>
+        <!-- Links -->
         <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
         <script src="../Data/Countries-cities/country-states.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <?php include_once '../Includes/Connect.php'; ?>
 	</head>
 	<body>
         <nav>
@@ -39,15 +40,8 @@
                 ?>
             </tbody>
         </table>
-        <script>
-            $(document).ready(function(){
-                $("#searchBar").on("keyup",function(){
-                  var value= $(this).val().toLowerCase();
-                  $("#body tr").filter(function(){
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                  });
-                });
-            });
-        </script>
+
+        <!-- Scripts -->
+        <script src="../Scripts/TableSearch.js"></script>
 	</body>
 </html>

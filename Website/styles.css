@@ -58,8 +58,9 @@ nav ul li a {
 
 }
 
-nav ul li.menuButton:hover {
+.menuButton a:hover, .current a:hover{
     background-color: var(--secondary-color);
+    color: var(--text-color) !important;
 }
 
 button {
@@ -80,14 +81,6 @@ button a {
     text-decoration: none;
     font-family: Arial;
     color: var(--text-color);
-}
-
-button:hover {
-    background-color: var(--secondary-color);
-}
-button a:hover {
-    border-width: 3px;
-    border-color: black;
 }
 .buttons{
     margin: 20px 1%;
