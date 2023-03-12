@@ -67,8 +67,8 @@
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<option value=" . $row["id"] . ">" . $row['title'] . "</option>";
         }
-
         echo "</select>";
+
         ?>
         <br><br>
         <label for="city">City:</label> <br>
@@ -146,12 +146,16 @@
             <option value="59">Visaginas Municipality</option>
             <option value="60">Zarasai District Municipality</option>
         </select>
+
         <br><br>
+
         <label for="">Additional comments</label>
+
         <br>
         <textarea name="comments" id="comments" cols="30" rows="5" placeholder="Enter text here..."></textarea>
         <!-- <input type="text" rows="4" size="30" name="comments" /> -->
         <br><br>
+
         <input class="firstB" type="submit" value="Create project" />
     </form>
 

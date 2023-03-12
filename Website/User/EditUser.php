@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<?php include_once '../Includes/Connect.php'; ?>
+		<?php
+         include_once '../Includes/Connect.php'; 
+         $query = 'SELECT * FROM MEMBER WHERE ID = ' . $_GET['id'];
+         $tmp = $conn->query($query);
+         $old_row = mysqli_fetch_array($tmp);
+
+        ?>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +26,7 @@
         </nav>
 		<form method="post" action="../Includes/NewUserAdd.php">
 		    <label for="fname">User first name:</label> <br>
-		    <input type="text" id="fname" name="fname" placeholder="Enter users first name" />
+            <input type="text" id="fname" name="fname" placeholder="Enter users last name" />
             <br><br>
             <label for="lname">User last name:</label> <br>
 		    <input type="text" id="lname" name="lname" placeholder="Enter users last name" />

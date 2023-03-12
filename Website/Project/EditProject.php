@@ -241,6 +241,10 @@
         </select>
         <br>
         <input class="firstB" type="submit" value="Save changes" />
+
+
+        <label for="">Academic group name</label>
+        <input type="checkbox">
     </form>
 
     <!-- Scripts -->

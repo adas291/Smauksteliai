@@ -6,7 +6,7 @@
     $manager = $_POST['manager'];
 
 
-    $sql = "INSERT INTO CLIENT (name, additional_info, manager_id) VALUES ('$name', '$additional', '$manager')";
+    $sql = "INSERT INTO CLIENT (name, additional_info, fk_MANAGER_id) VALUES ('$name', '$additional', '$manager')";
 
     $conn->query($sql) or die($conn->error);
 
