@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-        <?php include '../Includes/Connect.php'; ?>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>EditProjectPage</title>
-        <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
-	</head>
-	<body>
-        <nav>
-            <img src="../Images/Logo.png" alt="logo">
-            <ul>
-				<li class="menuButton"><a href="./ViewProjects.php">Back</a></li>
-                <li><a>Edit project</a></li>
-            </ul>
-        </nav>
-        <form action="NewProjectAdd.php" method="post">
+
+<head>
+    <?php include '../Includes/Connect.php';
+    $query = "SELECT * FROM PROJECT WHERE id = " . $_GET['id'];
+    $result = $conn->query($query);
+    $old_row = $result->fetch_assoc();
+    ?>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EditProjectPage</title>
+    <link rel="stylesheet" href="../styles.css?v=<?php echo time(); ?>">
+</head>
+
+<body>
+    <nav>
+        <img src="../Images/Logo.png" alt="logo">
+        <ul>
+            <li class="menuButton"><a href="./ViewProjects.php">Back</a></li>
+            <li><a>Edit project</a></li>
+        </ul>
+    </nav>
+    <form action="SaveEditedProject.php?id=<?php echo $_GET['id']; ?>" method="post">
         <label for="pname">Project's name:</label> <br>
-        <input name="title" type="text" id="pname" placeholder="Enter project's name" />
+        <input name="title" type="text" id="pname" value="<?php echo $old_row['title'] ?>" />
         <br>
         <br>
         <label for="subject">Subject: </label>
         <br>
         <?php
 
-        $sql = "SELECT name FROM QUALIFICATION ";
+        $sql = "SELECT id, name FROM QUALIFICATION ";
         $result = $conn->query($sql) or die($conn->error);
+        echo '<select  name="fk_QUALIFICATION_id">';
+        while ($tmp_row = mysqli_fetch_array($result)) {
 
-        echo '<select name="subject">';
-
-        while ($row = mysqli_fetch_array($result)) {
-            echo '<option name="' . $row['name'] . '">' . $row['name'] . "</option>";
+            echo '<option ';
+            if ($tmp_row['id'] == $old_row['fk_QUALIFICATION_id']) {
+                echo "selected";
+            }
+            echo ' value="' . $tmp_row['id'] . '">' . $tmp_row['name'] . "</option>";
         }
-
         echo "</select>";
 
         ?>
@@ -43,10 +51,15 @@
         $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
         $result = $conn->query($sql) or die($conn->error);
 
-        echo "<select name='manager'>";
+        echo '<select name="fk_MANAGER_id">';
 
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<option value="' . $row['id'] . '">' . $row['name'] . $row['surname'] . "</option>";
+            echo '<option ';
+            if ($row['id'] == $old_row['fk_MANAGER_id']) {
+                echo "selected ";
+            }
+            echo  'value="' . $row['id'] . '">' . $row['fname'] . $row['surname'] .
+                "</option>";
         }
 
         echo "</select>";
@@ -59,10 +72,13 @@
         $sql = "SELECT * FROM TEACHING_MATERIAL";
         $result = $conn->query($sql) or die($conn->error);
 
-        echo "<select name='material'>";
+        echo "<select name='fk_TEACHING_MATERIAL_id'>";
 
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<option value=" . $row["id"] . ">" . $row['title'] . "</option>";
+            echo "<option ";
+            if ($old_row['fk_TEACHING_MATERIAL_id'] == $row['id'])
+                echo " selected ";
+            echo "value=" . $row["id"] . ">" . $row['title'] . "</option>";
         }
 
         echo "</select>";
@@ -146,10 +162,85 @@
         <br><br>
         <label for="">Additional comments</label>
         <br>
-		<textarea name="comments" id="comments" cols="30" rows="5" placeholder="Enter text here..."></textarea>
+
+        <textarea name="additional_info" id="comments" cols="30" rows="5"><?php echo $old_row['additional_info'] ?></textarea>
         <!-- <input type="text" rows="4" size="30" name="comments" /> -->
         <br><br>
+        <label for="">Start date</label>
+        <?php
+
+        echo '<input type="date" name="start_date"';
+        if ($old_row['start_date'] != null) {
+            echo 'value="' . $old_row['start_date'] . '"';
+        }
+        echo '>'
+        ?>
+
+        <br><br>
+
+        <label for="">End date</label>
+        <?php
+        echo '<input type="date" name="end_date"';
+        if ($old_row['end_date'] != null) {
+            echo 'value="' . $old_row['end_date'] . '"';
+        }
+        echo '>'
+        ?>
+        <br><br>
+
+        <label for="">Academic hours per project</label>
+        <?php
+        echo '<input type="number" name="academic_hours_per_project"';
+        if ($old_row['academic_hours_per_project'] != null) {
+            echo 'value="' . $old_row['academic_hours_per_project'] . '"';
+        }
+        echo ">"
+        ?>
+        <br><br>
+
+        <label for="">Academic hours per project</label>
+        <?php
+        echo '<input type="number" name="academic_hours_per_session"';
+        if ($old_row['academic_hours_per_project'] != null) {
+            echo 'value="' . $old_row['academic_hours_per_session'] . '"';
+        }
+        echo ">"
+        ?>
+        <br><br>
+
+
+        <label for="">Project state</label>
+        <select name="project_state" >
+            <?php
+            $query = "SELECT * FROM PROJECT_STATE";
+            $result = $conn->query($query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<option ';
+                if($old_row['project_state'] == $row['id']) {
+                    echo 'selected ';
+                }
+                echo 'value="' . $row['id'] . '">' . $row['name'] . '</option>';
+            }
+            ?>
+        </select>
+        <br><br>
+
+        <label for="">Classroom</label>
+        <select name="fk_ROOM_id" >
+            <?php
+            $query = "SELECT * FROM ROOM";
+            $result = $conn->query($query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<option ';
+                if($old_row['fk_ROOM_id'] == $row['id'])
+                    echo 'selected ';
+                echo 'value="' . $row['id'] . '">' . $row['title'] . '</option>';
+            }
+            ?>
+        </select>
+        <br>
         <input class="firstB" type="submit" value="Save changes" />
     </form>
-    </body>
+</body>
+
 </html>

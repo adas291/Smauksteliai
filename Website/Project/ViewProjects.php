@@ -29,28 +29,28 @@
                 <th>Manager</th>
                 <th></th>
             </tr>
-            <tbody id="body">
-                <?php
-                    $query = "SELECT PROJECT.id as 'id', PROJECT.title, PROJECT_STATE.name as 'state', PROJECT.city, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' 
+        <tbody id="body">
+            <?php
+            $query = "SELECT PROJECT.id as 'id', PROJECT.title, PROJECT_STATE.name as 'state', PROJECT.city, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' 
                         FROM PROJECT 
                         JOIN MEMBER ON PROJECT.fk_MANAGER_id = MEMBER.id
-                        JOIN PROJECT_STATE ON PROJECT.project_state = PROJECT_STATE.id_PROJECT_STATE;";
-                        
+                        JOIN PROJECT_STATE ON PROJECT.project_state = PROJECT_STATE.id;";
 
-                    $result = $conn->query($query);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo '<tr id="' . $row['id'] . '">' . 
-                        '<td>' . $row['title'] . '</td><td>' .  $row['state']. '</td><td>' . $row['city'] . '</td><td>' . $row['manager'] . '</td><td><a href="./EditProject.php">edit</a></td></tr>';
-                    }
-                ?>
-            </tbody>
-            <script>
-            $(document).ready(function(){
-                $("#searchBar").on("keyup",function(){
-                  var value= $(this).val().toLowerCase();
-                  $("#body tr").filter(function(){
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                  });
+
+            $result = $conn->query($query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<tr>' .
+                    '<td>' . $row['title'] . '</td><td>' .  $row['state'] . '</td><td>' . $row['city'] . '</td><td>' . $row['manager'] . '</td><td><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></td></tr>';
+            }
+            ?>
+        </tbody>
+        <script>
+            $(document).ready(function() {
+                $("#searchBar").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#body tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
                 });
             });
         </script>
