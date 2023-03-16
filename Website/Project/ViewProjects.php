@@ -29,7 +29,7 @@
                 <th>City</th>
                 <th>Manager</th>
                 <th>Edit</th>
-                <th>Remove</th>
+                <th>X</th>
             </tr>
         </thead>
         <tbody id="body">
@@ -42,14 +42,18 @@
 
             $result = $conn->query($query);
             while ($row = mysqli_fetch_assoc($result)) {
+                $stateOptions = getStateOptions($row['state']);
+                $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
+                $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
                 echo '<tr id="' . $row['id'] . '">' .
                     '<td>' . $row['title'] . '</td>' .
                     '<td><select name="state" onchange="updateState(' . $row['id'] . ', this.value)">' .
-                        getStateOptions($row['state']) .
+                        $stateOptions .
                     '</select></td>' .
                     '<td>' . $row['city'] . '</td>' .
                     '<td>' . $row['manager'] . '</td>' .
-                    '<td><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></td>' .
+                    '<td>' . $editLink . '</td>' .
+                    '<td>' . $removeButton . '</td>' .
                     '</tr>';
             }
 

@@ -58,7 +58,7 @@ ul li a {
     color: var(--text-color) !important;
 }
 
-button {
+.niceButton {
     background-color: var(--background-color);
     border-color: var(--secondary-color);
     border-width: 2px;

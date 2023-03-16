@@ -31,7 +31,8 @@
                 <th>Sex</th>
                 <th>Role</th>
                 <th>Client</th>
-                <th></th>
+                <th>Edit</th>
+                <th>X</th>
             </thead>
             <tbody id="body">
                 <?php
@@ -42,18 +43,23 @@
                         $result = $conn->query($sql);
 
                         while ($row = mysqli_fetch_assoc($result)) {
-
-                            if ($row['client'])
-                            {
-                                echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td>".$row["client"]."</td><td><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></td></tr>";
-                            }
-                            
-                            else
-                            {
-                                echo "<tr><td>".$row["fname"]."</td><td>".$row["surname"]."</td><td>".$row["birth_day"]."</td><td>".$row["phone_number"]."</td><td>".$row["email"]."</td><td>".$row["country"]."</td><td>"
-                                    .$row["city"]."</td><td>".$row["sex"]."</td><td>".$row["fk_ROLE_name"]."</td><td></td><td><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></td></tr>";
-                            }
+                            $client = $row['client'] ? $row['client'] : '';
+                            $editLink = "<button><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></button>";
+                            $removeButton = "<img src='../Images/Remove.png' alt='remove' style='width:20px;height:auto;'>";
+                            echo "<tr>
+                                    <td>".$row['fname']."</td>
+                                    <td>".$row['surname']."</td>
+                                    <td>".$row['birth_day']."</td>
+                                    <td>".$row['phone_number']."</td>
+                                    <td>".$row['email']."</td>
+                                    <td>".$row['country']."</td>
+                                    <td>".$row['city']."</td>
+                                    <td>".$row['sex']."</td>
+                                    <td>".$row['fk_ROLE_name']."</td>
+                                    <td>".$client."</td>
+                                    <td>".$editLink."</td>
+                                    <td>".$removeButton."</td>
+                                 </tr>";
                         }
                 ?>
             </tbody>

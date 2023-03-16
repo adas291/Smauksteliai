@@ -20,7 +20,7 @@
 			</ul>
 		</nav>
 		<div class="buttons">
-			<button class="firstB">Dark mode</button>
+			<button class="niceButton">Dark mode</button>
 		</div>
 
 		<!-- Scripts -->

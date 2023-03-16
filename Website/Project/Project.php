@@ -20,9 +20,9 @@
             </ul>
         </nav>
         <div class="buttons">
-            <button class="firstB"><a href="NewProject.php">Create new project</a></button>
+            <button class="niceButton"><a href="NewProject.php">Create new project</a></button>
             <br />
-            <button><a href="ViewProjects.php">View projects</a></button>      
+            <button class="niceButton"><a href="ViewProjects.php">View projects</a></button>      
         </div>
 
         <!-- Scripts -->

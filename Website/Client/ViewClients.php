@@ -27,6 +27,8 @@
             <th>Name</th>
             <th>Additional info</th>
             <th>Manager</th>
+            <th>Edit</th>
+            <th>X</th>
         </thead>
         <tbody id="body">
             <?php
@@ -36,7 +38,13 @@
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr><td>" . $row["name"] . "</td><td>" . $row["additional_info"] . "</td><td>" . $row["manager"] . '</td><td><a href="./EditClient.php?id=' . $row['id'] . '">edit</a></td></tr>';
+                echo '<tr id="' . $row['id'] . '">' .
+                    '<td>' . $row['name'] . '</td>' .
+                    '<td>' . $row['additional_info'] . '</td>' .
+                    '<td>' . $row['manager'] . '</td>' .
+                    '<td><button type="button"><a href="./EditClient.php?id=' . $row['id'] . '">edit</a></button></td>' .
+                    '<td><img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;"></td>' .
+                    '</tr>';
             }
             ?>
         </tbody>
