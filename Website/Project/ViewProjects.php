@@ -53,7 +53,7 @@
                     '<td>' . $row['city'] . '</td>' .
                     '<td>' . $row['manager'] . '</td>' .
                     '<td>' . $editLink . '</td>' .
-                    '<td>' . $removeButton . '</td>' .
+                    '<td><a href="RemoveProject.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
                     '</tr>';
             }
 
