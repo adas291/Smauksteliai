@@ -1,63 +1,79 @@
+/* Main stuff */
+
 :root {
     --primary-color: #FAEAB1;
     --secondary-color: #E5BA73;
-    --background-color: #F7F1E5;
+    --background-color: rgb(255, 255, 255);
+    --background-color2: #F7F1E5;
     --text-color: #202020;
 }
-.teach, .stud {
-    display: none;
-}
-ul {
-    display:flex;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-body {
-    background-color: var(--background-color);
-}
-form {
-    padding: 20px 20px;
-}
 * {
+    font-family: 'Times New Roman', Times, serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border-collapse: collapse;
 }
+
+body {
+    background-color: var(--background-color);
+}
+nav {
+    background-color: var(--primary-color) !important;
+}
+
+/* List items */
+
+ul {
+    display:flex;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+ul li {
+    list-style: none;
+}
+ul li a {
+    font-size: 25px !important;
+    color: var(--text-color);
+    padding: 0 30px !important;
+
+}
+
+/* Navigation bar */
+
+.navbar{
+    background-color: var(--primary-color);
+    padding: 0 0 !important;
+}
+.navigationBar {
+    padding: 0 !important;
+    width:fit-content !important;
+}
+
+/* Tables */
+
 table, td, tr, th{
     border: 1px solid black;
     padding: 5px 5px;
 }
+
+/* Images */
+
+.logoImg{
+    width: 70px;
+    height: 70px;
+    margin: 0 25px
+}
+
+/* Buttons */
+
 .current {
     background-color: var(--secondary-color);
 }
-img{
-    float: left;
-    width: 70px;
-    height: 70px;
-}
-ul li {
-    list-style: none;
-    float: left;
-    /* display: inline-block; */
-    line-height: 70px;
-}
-
-ul li a {
-    display: block;
-    text-decoration: none;
-    font-size: 25px;
-    font-family: Arial;
-    color: var(--text-color);
-    padding: 0 20px;
-
-}
-
 .menuButton a:hover, .current a:hover{
     background-color: var(--secondary-color);
     color: var(--text-color) !important;
 }
-
 .niceButton {
     background-color: var(--background-color);
     border-color: var(--secondary-color);
@@ -70,7 +86,6 @@ ul li a {
     font-family: Arial;
     color: var(--text-color);
 }
-
 button a {
     font-size: 20px;
     text-decoration: none;
@@ -80,6 +95,18 @@ button a {
 .buttons{
     margin: 20px 1%;
 }
+.setButton{
+    padding: 0 45px;
+}
+.settingsButton{
+    padding: 5px 5px;
+    border-radius: 50%;
+}
+.settingsButton:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Login page */
 
 .loginImgContainer {
     text-align: center;
@@ -103,34 +130,21 @@ img.loginLogo {
     text-align: center;
     padding: 10px;
     margin: 12px 0;
-   
 }
-.btn-minecraft {
-    font-family: 'Minecraftia', sans-serif;
-    background: #727272;
-    color: rgb(247, 247, 247);
-    width: 200px;
-    padding: .5rem 0;
-    margin-bottom: .75rem;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
-    font-size: 1rem;
-    letter-spacing: .025em;
-    border: 2px solid rgba(0, 0, 0, 1);
-    box-shadow: inset 3px 3px 0 rgba(255, 255, 255, 0.5),
-                inset -3px -3px 0 rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-  }
-  .btn-minecraft:hover {
-    background: rgba(115, 107, 221, 1);
-  }
-  .container {
-    padding: 0 !important;
-    width:fit-content !important;
-    background-color: var(--primary-color);
-  }
-  .container-fluid {
-    background-color: var(--primary-color);
-  }
-  nav {
-    background-color: var(--background-color);
-  }
+
+/* containers */
+.inputContainer {
+    background-color: var(--background-color2);
+    margin-top: 10px !important;
+    padding: 30px 30px !important;
+    border-radius: 2%;
+}
+.footer {
+    background-color: var(--background-color2);
+}
+
+/* For scripts */
+
+.teach, .stud {
+    display: none;
+}
