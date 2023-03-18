@@ -83,6 +83,15 @@
                 <div class="container">
                     <div class="container">
                         <input type="text" id="searchBar" placeholder="Search...">
+                        Filter: 
+                        <input type="checkbox" name="filterStudents" id="filterStudents">
+                        <label for="filterStudents">Students</label>
+                        <input type="checkbox" name="filterTeachers" id="filterTeachers">
+                        <label for="filterTeachers">Teachers</label>
+                        <input type="checkbox" name="filterManagers" id="filterManagers">
+                        <label for="filterManagers">Managers</label>
+
+
                     </div>
                     <div class="container inputContainer">
                     <table>
