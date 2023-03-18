@@ -78,54 +78,65 @@
                 </svg>
             </a>
         </nav>
-        <input type="text" id="searchBar" placeholder="Search...">
-        <table>
-            <thead>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Birth date</th>
-                <th>Phone number</th>
-                <th>Email</th>
-                <th>Country</th>
-                <th>City</th>
-                <th>Sex</th>
-                <th>Role</th>
-                <th>Client</th>
-                <th>Edit</th>
-                <th>X</th>
-            </thead>
-            <tbody id="body">
-                <?php
-                        $sql = "SELECT MEMBER.id as id, fname, surname, birth_day, phone_number, country, email, city, SEX.name as 'sex', fk_ROLE_name, CLIENT.name as 'client' FROM MEMBER
-                        JOIN SEX on MEMBER.sex = SEX.id_SEX
-                        LEFT JOIN CLIENT on MEMBER.fk_CLIENT_id = CLIENT.id";
+        <div class="container-fluid">
+            <div class="container h1 d-flex justify-content-center">View users</div>
+                <div class="container">
+                    <div class="container">
+                        <input type="text" id="searchBar" placeholder="Search...">
+                    </div>
+                    <div class="container inputContainer">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Birth date</th>
+                                <th>Phone number</th>
+                                <th>Email</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>Sex</th>
+                                <th>Role</th>
+                                <th>Client</th>
+                                <th>Edit</th>
+                                <th>X</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body">
+                            <?php
+                                    $sql = "SELECT MEMBER.id as id, fname, surname, birth_day, phone_number, country, email, city, SEX.name as 'sex', fk_ROLE_name, CLIENT.name as 'client' FROM MEMBER
+                                    JOIN SEX on MEMBER.sex = SEX.id_SEX
+                                    LEFT JOIN CLIENT on MEMBER.fk_CLIENT_id = CLIENT.id";
 
-                        $result = $conn->query($sql);
+                                    $result = $conn->query($sql);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $client = $row['client'] ? $row['client'] : '';
-                            $editLink = "<button><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></button>";
-                            $removeButton = "<a href='./RemoveUser.php?id=" . $row['id'] . "'><img src='../Images/Remove.png' alt='remove' style='width:20px;height:auto;'>";
-                            echo "<tr>
-                                    <td>".$row['fname']."</td>
-                                    <td>".$row['surname']."</td>
-                                    <td>".$row['birth_day']."</td>
-                                    <td>".$row['phone_number']."</td>
-                                    <td>".$row['email']."</td>
-                                    <td>".$row['country']."</td>
-                                    <td>".$row['city']."</td>
-                                    <td>".$row['sex']."</td>
-                                    <td>".$row['fk_ROLE_name']."</td>
-                                    <td>".$client."</td>
-                                    <td>".$editLink."</td>
-                                    <td>".$removeButton."</td>
-                                 </tr>";
-                        }
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $client = $row['client'] ? $row['client'] : '';
+                                        $editLink = "<button><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></button>";
+                                        $removeButton = "<a href='./RemoveUser.php?id=" . $row['id'] . "'><img src='../Images/Remove.png' alt='remove' style='width:20px;height:auto;'>";
+                                        echo "<tr>
+                                                <td>".$row['fname']."</td>
+                                                <td>".$row['surname']."</td>
+                                                <td>".$row['birth_day']."</td>
+                                                <td>".$row['phone_number']."</td>
+                                                <td>".$row['email']."</td>
+                                                <td>".$row['country']."</td>
+                                                <td>".$row['city']."</td>
+                                                <td>".$row['sex']."</td>
+                                                <td>".$row['fk_ROLE_name']."</td>
+                                                <td>".$client."</td>
+                                                <td>".$editLink."</td>
+                                                <td>".$removeButton."</td>
+                                            </tr>";
+                                    }
 
-                    
-                ?>
-            </tbody>
-        </table>
+                                
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="../Scripts/TableSearch.js"></script>

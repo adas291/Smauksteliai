@@ -81,36 +81,45 @@
             </svg>
         </a>
     </nav>
-    <input type="text" id="searchBar" placeholder="Search...">
-    <table>
-        <thead>
-            <th>Name</th>
-            <th>Additional info</th>
-            <th>Manager</th>
-            <th>Edit</th>
-            <th>X</th>
-        </thead>
-        <tbody id="body">
-            <?php
-            $sql = "SELECT CLIENT.id as 'id', CLIENT.name, CLIENT.additional_info, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' FROM CLIENT
-                        JOIN MEMBER on MEMBER.id = CLIENT.fk_MANAGER_id";
+    <div class="container-fluid">
+        <div class="container h1 d-flex justify-content-center">View clients</div>
+            <div class="container">
+                <div class="container">
+                    <input type="text" id="searchBar" placeholder="Search...">
+                </div>
+                <div class="container inputContainer">
+                <table>
+                    <thead>
+                        <th>Name</th>
+                        <th>Additional info</th>
+                        <th>Manager</th>
+                        <th>Edit</th>
+                        <th>X</th>
+                    </thead>
+                    <tbody id="body">
+                        <?php
+                        $sql = "SELECT CLIENT.id as 'id', CLIENT.name, CLIENT.additional_info, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' FROM CLIENT
+                                    JOIN MEMBER on MEMBER.id = CLIENT.fk_MANAGER_id";
 
-            $result = $conn->query($sql);
+                        $result = $conn->query($sql);
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
-                $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
-                echo '<tr id="' . $row['id'] . '">' .
-                    '<td>' . $row['name'] . '</td>' .
-                    '<td>' . $row['additional_info'] . '</td>' .
-                    '<td>' . $row['manager'] . '</td>' .
-                    '<td>' . $editLink . '</td>' .
-                    '<td><a href="RemoveUser.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
-                    '</tr>';
-            }
-            ?>
-        </tbody>
-    </table>
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
+                            $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
+                            echo '<tr id="' . $row['id'] . '">' .
+                                '<td>' . $row['name'] . '</td>' .
+                                '<td>' . $row['additional_info'] . '</td>' .
+                                '<td>' . $row['manager'] . '</td>' .
+                                '<td>' . $editLink . '</td>' .
+                                '<td><a href="RemoveUser.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
+                                '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
