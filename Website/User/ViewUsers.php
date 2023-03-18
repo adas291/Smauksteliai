@@ -105,7 +105,7 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $client = $row['client'] ? $row['client'] : '';
                             $editLink = "<button><a href='./EditUser.php?id=" . $row['id'] . "'>edit</a></button>";
-                            $removeButton = "<img src='../Images/Remove.png' alt='remove' style='width:20px;height:auto;'>";
+                            $removeButton = "<a href='./RemoveUser.php?id=" . $row['id'] . "'><img src='../Images/Remove.png' alt='remove' style='width:20px;height:auto;'>";
                             echo "<tr>
                                     <td>".$row['fname']."</td>
                                     <td>".$row['surname']."</td>
@@ -121,6 +121,8 @@
                                     <td>".$removeButton."</td>
                                  </tr>";
                         }
+
+                    
                 ?>
             </tbody>
         </table>

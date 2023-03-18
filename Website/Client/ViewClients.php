@@ -98,12 +98,14 @@
             $result = $conn->query($sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
+                $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
+                $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
                 echo '<tr id="' . $row['id'] . '">' .
                     '<td>' . $row['name'] . '</td>' .
                     '<td>' . $row['additional_info'] . '</td>' .
                     '<td>' . $row['manager'] . '</td>' .
-                    '<td><button type="button"><a href="./EditClient.php?id=' . $row['id'] . '">edit</a></button></td>' .
-                    '<td><img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;"></td>' .
+                    '<td>' . $editLink . '</td>' .
+                    '<td><a href="RemoveUser.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
                     '</tr>';
             }
             ?>
