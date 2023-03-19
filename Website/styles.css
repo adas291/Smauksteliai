@@ -12,7 +12,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border-collapse: collapse;
+    border-collapse: collapse !important;
 }
 
 body {
@@ -44,10 +44,12 @@ ul li a {
 .navbar{
     background-color: var(--primary-color);
     padding: 0 0 !important;
+    align-items: start !important;
 }
 .navigationBar {
     padding: 0 !important;
     width:fit-content !important;
+    align-self: center !important;
 }
 
 /* Tables */
@@ -56,13 +58,16 @@ table, td, tr, th{
     border: 1px solid black;
     padding: 5px 5px;
 }
+.calendarTable {
+    border: 1px solid black !important;
+}
 
 /* Images */
 
 .logoImg{
     width: 70px;
     height: 70px;
-    margin: 0 25px
+    margin: 0 25px;
 }
 
 /* Buttons */
@@ -99,11 +104,34 @@ button a {
     padding: 0 45px;
 }
 .settingsButton{
+    margin: 20px 0 !important;
     padding: 5px 5px;
     border-radius: 50%;
 }
 .settingsButton:hover {
     background-color: var(--secondary-color);
+}
+.scheduleBtn {
+    margin: 5px 5px !important;
+    border-radius: 50% !important;
+    border-color: black !important;
+    border-width: 2px !important;
+}
+.scheduleBtn:hover {
+    background-color: #202020!important;
+    color: white!important;
+}
+.scheduleBtn:active {
+    background-color: #202020!important;
+    color: white!important;
+}
+.plusBtn{
+    background-color: var(--background-color2) !important;
+    border-radius: 50% !important;
+}
+.plusBtn:hover{
+    background-color: #202020!important;
+    color: white!important;
 }
 
 /* Login page */
@@ -142,9 +170,29 @@ img.loginLogo {
 .footer {
     background-color: var(--background-color2);
 }
+.calendar {
+    margin-top: 20px !important;
+}
 
 /* For scripts */
 
 .teach, .stud {
     display: none;
+}
+.list{
+    height: 100px;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: block; 
+}
+.list::-webkit-scrollbar{
+    width: 8px;
+    border-radius: 10%;
+}
+.list::-webkit-scrollbar-thumb {
+    background: #575656; 
+    border-radius: 10%;
+}
+.list::-webkit-scrollbar-thumb:hover {
+    background: #202020; 
 }
