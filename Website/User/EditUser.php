@@ -85,112 +85,116 @@
                 </svg>
             </a>
         </nav>
-		<form method="post" action="./SaveEditedUser.php?id=<?php echo $_GET['id'];  ?>">
+        <div class="container-fluid">
+            <div class="container h1 d-flex justify-content-center">Edit user</div>
+                <div class="container inputContainer"> 
+                    <form method="post" action="./SaveEditedUser.php?id=<?php echo $_GET['id'];  ?>">
+                        <label for="fname">User first name:</label> <br>
+                        <input type="text" id="fname" name="fname" value="<?php echo $old_row['fname']; ?>" />
+                        <br><br>
 
-		    <label for="fname">User first name:</label> <br>
-            <input type="text" id="fname" name="fname" value="<?php echo $old_row['fname']; ?>" />
-            <br><br>
+                        <label for="lname">User last name:</label> <br>
+                        <input type="text" id="lname" name="surname" value="<?php echo $old_row['surname']; ?>" />
+                        <br><br>
 
-            <label for="lname">User last name:</label> <br>
-		    <input type="text" id="lname" name="surname" value="<?php echo $old_row['surname']; ?>" />
-            <br><br>
+                        <label for="sex">Select sex:</label> <br>
+                        <?php
+                            $sql = "SELECT id_SEX, name FROM SEX";
 
-            <label for="sex">Select sex:</label> <br>
-            <?php
-                $sql = "SELECT id_SEX, name FROM SEX";
+                            $result = $conn->query($sql) or die($conn->error);
 
-                $result = $conn->query($sql) or die($conn->error);
+                            echo "<select name='sex'>";
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option ";
+                                if ($row['id_SEX'] == $old_row['sex']) echo 'selected ';      
+                                echo "value='" .$row['id_SEX']. "'>".$row['name']."</option>";
+                            }
+                            echo "</select>";
+                        ?>
+                        <br><br>    
 
-                echo "<select name='sex'>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option ";
-                    if ($row['id_SEX'] == $old_row['sex']) echo 'selected ';      
-                    echo "value='" .$row['id_SEX']. "'>".$row['name']."</option>";
-                }
-                echo "</select>";
-            ?>
-            <br><br>    
+                        <label for="birthdate">Users birthday:</label> <br>
+                        <input type="date" id="birthdate" name="birth_day" value="<?php echo $old_row['birth_day']; ?>">
+                        <br><br>
 
-            <label for="birthdate">Users birthday:</label> <br>
-            <input type="date" id="birthdate" name="birth_day" value="<?php echo $old_row['birth_day']; ?>">
-		    <br><br>
+                        <label for="pnumber">Phone number:</label> <br>
+                        <input type="tel" id="pnumber" name="phone_number" value="<?php echo $old_row['phone_number']; ?>" />
+                        <br><br>
 
-            <label for="pnumber">Phone number:</label> <br>
-		    <input type="tel" id="pnumber" name="phone_number" value="<?php echo $old_row['phone_number']; ?>" />
-            <br><br>
+                        <label for="email">Email:</label> <br>
+                        <input type="text" id="email" name="email" value="<?php echo $old_row['email']; ?>" />
+                        <br><br>
 
-            <label for="email">Email:</label> <br>
-		    <input type="text" id="email" name="email" value="<?php echo $old_row['email']; ?>" />
-            <br><br>
+                        <!-- <label for="city">City:</label> <br>
+                        <input type="text" id="city" placeholder="Enter users city" />
+                        <br> -->
 
-            <!-- <label for="city">City:</label> <br>
-	    	<input type="text" id="city" placeholder="Enter users city" />
-            <br> -->
+                        <div class="country-states">
+                            <div>
+                                <label for="country">Country: </label>
+                                <br>
+                                <select id="country" name="country">
+                                    <option>Select country</option>
+                                </select>
+                            </div>
+                            <br>            
+                            <div>
+                                <label for="state">State:</label>
+                                <br>
+                                <select id="state" name="city">
+                                    <option>_</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
 
-            <div class="country-states">
-                <div>
-                    <label for="country">Country: </label>
-                    <br>
-                    <select id="country" name="country">
-                        <option>Select country</option>
-                    </select>
+                        <label for="role">Select role:</label> <br>
+                        <?php
+                            $sql = "SELECT name FROM ROLE";
+
+                            $result = $conn->query($sql) or die($conn->error);
+
+                            echo "<select name='fk_ROLE_name' id='role'>";
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option ";
+                                if ($row['name'] == $old_row['fk_ROLE_name']) echo 'selected ';      
+                                echo "value='" .$row['name']. "'>".$row['name']."</option>";
+                            }
+                            echo "</select>";
+                        ?>
+
+                        <br><br>
+                        <div class="teach" id="teach">
+                            <!--<label for="qualification">Qualification:</label> <br>
+                            <input type="text" id="qualification" name="qualification" placeholder="Enter qualification" />
+                            <br><br>-->
+                        </div>
+                        <div class="stud" id="stud">
+                            <label for="client">Client:</label> <br>
+                            <?php
+                            $sql = "SELECT id, name FROM CLIENT";
+
+                            $result = $conn->query($sql) or die($conn->error);
+
+                            echo "<select name='fk_CLIENT_id'>";
+                            echo "<option value='-1'>-</option>";
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option ";
+                                if ($row['id'] == $old_row['fk_CLIENT_id']) echo 'selected ';      
+                                echo "value='" .$row['id']. "'>".$row['name']."</option>";
+                            }
+                            echo "</select>";
+                            ?>
+                            <br><br>
+                            
+                        </div>
+                        <input class="firstB" type="submit" value="Save changes" />
+                    </form>
                 </div>
-                <br>            
-                <div>
-                    <label for="state">State:</label>
-                    <br>
-                    <select id="state" name="city">
-                        <option>_</option>
-                    </select>
-                </div>
-            </div>
-            <br>
-
-            <label for="role">Select role:</label> <br>
-            <?php
-                $sql = "SELECT name FROM ROLE";
-
-                $result = $conn->query($sql) or die($conn->error);
-
-                echo "<select name='fk_ROLE_name' id='role'>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option ";
-                    if ($row['name'] == $old_row['fk_ROLE_name']) echo 'selected ';      
-                    echo "value='" .$row['name']. "'>".$row['name']."</option>";
-                }
-                echo "</select>";
-            ?>
-
-            <br><br>
-            <div class="teach" id="teach">
-                <!--<label for="qualification">Qualification:</label> <br>
-		        <input type="text" id="qualification" name="qualification" placeholder="Enter qualification" />
-                <br><br>
-                <label for="price">Price:</label> <br>
-		        <input type="text" id="price" name="price" placeholder="Enter price" />
-                <br><br>-->
-            </div>
-            <div class="stud" id="stud">
-                <label for="client">Client:</label> <br>
-		        <?php
-                $sql = "SELECT id, name FROM CLIENT";
-
-                $result = $conn->query($sql) or die($conn->error);
-
-                echo "<select name='fk_CLIENT_id'>";
-                echo "<option value='-1'>-</option>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option ";
-                    if ($row['id'] == $old_row['fk_CLIENT_id']) echo 'selected ';      
-                    echo "value='" .$row['id']. "'>".$row['name']."</option>";
-                }
-                echo "</select>";
-                ?>
-                <br><br>
-                
-            </div>
-            <input class="firstB" type="submit" value="Save changes" />
-        </form>
+        </div>
+        <hr id="footer-rule"> 
+        <div class="footer"> 
+        </div>	
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

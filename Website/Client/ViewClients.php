@@ -104,7 +104,7 @@
                         $result = $conn->query($sql);
 
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
+                            $editLink = '<button type="button"><a href="./EditClient.php?id=' . $row['id'] . '">edit</a></button>';
                             $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
                             echo '<tr id="' . $row['id'] . '">' .
                                 '<td>' . $row['name'] . '</td>' .
@@ -119,6 +119,9 @@
                 </table>
             </div>
         </div>
+    </div>
+    <hr id="footer-rule"> 
+    <div class="footer"> 
     </div>
 
     <!-- Scripts -->

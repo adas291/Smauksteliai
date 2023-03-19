@@ -170,6 +170,9 @@
                     </div>
                     </div>
                 </div>
+        </div>
+        <hr id="footer-rule"> 
+        <div class="footer"> 
         </div> 
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

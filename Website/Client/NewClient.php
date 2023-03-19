@@ -78,30 +78,37 @@
                 </svg>
             </a>
         </nav>
-        <form method="post" action="../Includes/NewClientAdd.php">
-		    <label for="name">Client's name:</label> <br>
-		    <input type="text" id="name" name="name" placeholder="Enter client's name" />
-            <br><br>
-            <label for="additional">Additional info:</label> <br>
-		    <!--<input type="text" id="additional" name="additional" placeholder="Write additional info" /> -->
-            <textarea name="additional" id="additional" cols="30" rows="5" placeholder="Enter text here..."></textarea>
-            <br><br>
-            <label for="manager">Select manager:</label> <br>
-            <?php
-                $sql = "SELECT id,fname, surname FROM MEMBER WHERE fk_ROLE_name = 'manager'";
+        <div class="container-fluid">
+            <div class="container h1 d-flex justify-content-center">Create new client</div>
+                <div class="container inputContainer">
+                    <form method="post" action="../Includes/NewClientAdd.php">
+                        <label for="name">Client's name:</label> <br>
+                        <input type="text" id="name" name="name" placeholder="Enter client's name" />
+                        <br><br>
+                        <label for="additional">Additional info:</label> <br>
+                        <!--<input type="text" id="additional" name="additional" placeholder="Write additional info" /> -->
+                        <textarea name="additional" id="additional" cols="30" rows="5" placeholder="Enter text here..."></textarea>
+                        <br><br>
+                        <label for="manager">Select manager:</label> <br>
+                        <?php
+                            $sql = "SELECT id,fname, surname FROM MEMBER WHERE fk_ROLE_name = 'manager'";
 
-                $result = $conn->query($sql) or die($conn->error);
+                            $result = $conn->query($sql) or die($conn->error);
 
-                echo "<select name='manager'>";
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option value='".$row['id']."'>".$row['fname']." ".$row['surname']."</option>";
-                }
-                echo "</select>";
-            ?>
-            <br><br>
-            <input class="firstB" type="submit" value="Create client" />
-        </form>
-
+                            echo "<select name='manager'>";
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value='".$row['id']."'>".$row['fname']." ".$row['surname']."</option>";
+                            }
+                            echo "</select>";
+                        ?>
+                        <br><br>
+                        <input class="firstB" type="submit" value="Create client" />
+                    </form>
+                </div>
+        </div>
+        <hr id="footer-rule"> 
+        <div class="footer"> 
+        </div>
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 	</body>
