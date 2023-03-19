@@ -92,6 +92,8 @@
                         <tr>
                             <th>Project title</th>
                             <th>State</th>
+                            <th>Start date</th>
+                            <th>Project length</th>
                             <th>City</th>
                             <th>Manager</th>
                             <th>Edit</th>
@@ -100,42 +102,55 @@
                     </thead>
                     <tbody id="body">
                         <?php
-                        $query = "SELECT PROJECT.id as 'id', PROJECT.title, PROJECT_STATE.name as 'state', PROJECT.city, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' 
+                        $query = "SELECT start_date, academic_hours_per_project as project_length, PROJECT.id as 'id', PROJECT.title, PROJECT_STATE.id as 'project_state', PROJECT.city, CONCAT(MEMBER.fname, ' ' ,MEMBER.surname) as 'manager' 
                                     FROM PROJECT 
                                     JOIN MEMBER ON PROJECT.fk_MANAGER_id = MEMBER.id
                                     JOIN PROJECT_STATE ON PROJECT.project_state = PROJECT_STATE.id;";
 
 
                         $result = $conn->query($query);
+                        $projectStates = getProjectStates();
+
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $stateOptions = getStateOptions($row['state']);
                             $editLink = '<button type="button"><a href="./EditProject.php?id=' . $row['id'] . '">edit</a></button>';
                             $removeButton = '<img src="../Images/Remove.png" alt="remove" style="width:20px;height:auto;">';
                             echo '<tr id="' . $row['id'] . '">' .
                                 '<td>' . $row['title'] . '</td>' .
-                                '<td><select name="state" onchange="updateState(' . $row['id'] . ', this.value)">' .
-                                    $stateOptions .
+                                "<td><select id='{$row['id']}-project-state' name='state' onload='setProjectState({$row['id']}-project-state, {$row['project_state']})' onchange='updateState(" . $row['id'] . ', this.value)">' .  makeProjectOptions($row['project_state'], $projectStates) .
                                 '</select></td>' .
+                                '<td>' . $row['start_date'] . '</td>' .
+                                '<td>' . $row['project_length'] . '</td>' .
                                 '<td>' . $row['city'] . '</td>' .
                                 '<td>' . $row['manager'] . '</td>' .
                                 '<td>' . $editLink . '</td>' .
                                 '<td><a href="RemoveProject.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
                                 '</tr>';
+                            
                         }
-
-                        function getStateOptions($selectedState) {
+                        
+                        function makeProjectOptions($projectState, $options) {
+                            $result = '';
+                            foreach($options as $option)
+                            {
+                                $selected = $projectState == $option['id'] ? 'selected' : '';
+                                $result .= "<option  value='{$option['id']}'{$selected}>{$option['name']} </option>";
+                            }
+                            return $result;
+                        }
+                        
+                        function getProjectStates() {
                             global $conn;
 
                             $query = "SELECT * FROM PROJECT_STATE";
                             $result = $conn->query($query);
-                            $options = '';
+                            $options = [];
 
+                            // echo var_dump($result);
                             while ($row = mysqli_fetch_assoc($result)) {
-                                $isSelected = ($row['name'] == $selectedState) ? 'selected' : '';
-                                $options .= '<option value="' . $row['id'] . '" ' . $isSelected . '>' . $row['name'] . '</option>';
+                                $options .= "<option value='{$row['id']}'>{$row['name']}</option>";
                             }
-
-                            return $options;
+                            // return $options;
+                            return $result;
                         }   
                         ?>
                     </tbody>
@@ -150,6 +165,12 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="../Scripts/TableSearch.js"></script>
+    <script>
+        function setProjectState(value, id) {
+            document.getElementById(id).value = value;
+            console.log(`updated project: ${id}`);
+        } 
+    </script>
 </body>
 
 </html>
