@@ -137,9 +137,7 @@
                                                 <td>".$editLink."</td>
                                                 <td>".$removeButton."</td>
                                             </tr>";
-                                    }
-
-                                
+                                    }                                
                             ?>
                         </tbody>
                     </table>

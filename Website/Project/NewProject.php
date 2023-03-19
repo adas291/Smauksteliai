@@ -85,149 +85,181 @@
     <div class="container-fluid">
         <div class="container h1 d-flex justify-content-center">Create new project</div>
         <div class="container inputContainer">
-            <form action="NewProjectAdd.php" method="post">
-                <label for="pname">Project's name:</label> <br>
-                <input name="title" type="text" id="pname" placeholder="Enter project's name" />
-                <br><br>
-                <label for="subject">Subject: </label>
-                <br>
-                <?php
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <form action="NewProjectAdd.php" method="post" class="needs-validation" novalidate>
+                        <div class="input">
+                            <label for="pname" class="form-label">Project:</label> <br>
+                            <input name="title" type="text" class="form-control" placeholder="Enter project's name" required/>
+                            <div class="invalid-feedback">
+                                Please provide a valid name
+                            </div>
+                        </div>
+                        <div class="input">
+                            <label for="subject" class="form-label">Subject: </label> <br>
+                            <?php
+                            $sql = "SELECT * FROM QUALIFICATION ";
+                            $result = $conn->query($sql) or die($conn->error);
 
-                $sql = "SELECT * FROM QUALIFICATION ";
-                $result = $conn->query($sql) or die($conn->error);
+                            echo '<select name="subject" class="form-select" required>';
+                            echo '<option selected disabled value="">Select subject</option>';
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo '<option value="' . $row['id'] . '">' . $row['name'] . "</option>";
+                            }
+                            echo "</select>";
+                            ?>
+                            <div class="invalid-feedback">
+                                Please select a subject
+                            </div>
+                        </div>
+                        <div class="input">
+                            <label for="" class="form-label">Manager:</label> <br>
+                            <?php
+                            $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
+                            $result = $conn->query($sql) or die($conn->error);
 
-                echo '<select name="subject">';
+                            echo "<select name='manager' class='form-select' required>";
+                            echo '<option selected disabled value="">Assign subject</option>';
 
-                while ($row = mysqli_fetch_array($result)) {
-                    echo '<option value="' . $row['id'] . '">' . $row['name'] . "</option>";
-                }
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . $row['id'] . '">' . $row['name'] . $row['surname'] . "</option>";
+                            }
 
-                echo "</select>";
+                            echo "</select>";
+                            ?>
+                            <div class="invalid-feedback">
+                                Please select a manager
+                            </div>
+                        </div>
+                        <div class="input">
+                            <label for="" class="form-label">Teaching material: </label> <br>
+                            <?php
 
-                ?>
-                <br><br>
-                <label for="">Assign manager:</label> <br>
-                <?php
-                $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
-                $result = $conn->query($sql) or die($conn->error);
+                            $sql = "SELECT * FROM TEACHING_MATERIAL";
+                            $result = $conn->query($sql) or die($conn->error);
 
-                echo "<select name='manager'>";
+                            echo "<select name='material' class='form-select' required>";
+                            echo '<option selected disabled value="">Select teaching material</option>';
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<option value="' . $row['id'] . '">' . $row['name'] . $row['surname'] . "</option>";
-                }
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<option value=" . $row["id"] . ">" . $row['title'] . "</option>";
+                            }
+                            echo "</select>";
 
-                echo "</select>";
-
-                ?>
-                <br><br>
-                <label for="">Teaching material: </label> <br>
-                <?php
-
-                $sql = "SELECT * FROM TEACHING_MATERIAL";
-                $result = $conn->query($sql) or die($conn->error);
-
-                echo "<select name='material'>";
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option value=" . $row["id"] . ">" . $row['title'] . "</option>";
-                }
-                echo "</select>";
-
-                ?>
-                <br><br>
-                <label for="ahours">Academic hours:</label> <br>
-                <input name="ahours" type="number" id="ahours" placeholder="Enter academic hours" />
-                <br><br>
-                <label for="sdate">Start date:</label> <br>
-                <input type="date" id="sdate" name="sdate" >
-                <br><br>
-                <label for="city">City:</label> <br>
-                <select id="city" name="city">
-                    <option value="">Select city</option>
-                    <option value="01">Akmenė District Municipality</option>
-                    <option value="02">Alytus City Municipality</option>
-                    <option value="AL">Alytus County</option>
-                    <option value="03">Alytus District Municipality</option>
-                    <option value="05">Birštonas Municipality</option>
-                    <option value="06">Biržai District Municipality</option>
-                    <option value="07">Druskininkai municipality</option>
-                    <option value="08">Elektrėnai municipality</option>
-                    <option value="09">Ignalina District Municipality</option>
-                    <option value="10">Jonava District Municipality</option>
-                    <option value="11">Joniškis District Municipality</option>
-                    <option value="12">Jurbarkas District Municipality</option>
-                    <option value="13">Kaišiadorys District Municipality</option>
-                    <option value="14">Kalvarija municipality</option>
-                    <option value="15">Kaunas City Municipality</option>
-                    <option value="KU">Kaunas County</option>
-                    <option value="16">Kaunas District Municipality</option>
-                    <option value="17">Kazlų Rūda municipality</option>
-                    <option value="18">Kėdainiai District Municipality</option>
-                    <option value="19">Kelmė District Municipality</option>
-                    <option value="20">Klaipeda City Municipality</option>
-                    <option value="KL">Klaipėda County</option>
-                    <option value="21">Klaipėda District Municipality</option>
-                    <option value="22">Kretinga District Municipality</option>
-                    <option value="23">Kupiškis District Municipality</option>
-                    <option value="24">Lazdijai District Municipality</option>
-                    <option value="MR">Marijampolė County</option>
-                    <option value="25">Marijampolė Municipality</option>
-                    <option value="26">Mažeikiai District Municipality</option>
-                    <option value="27">Molėtai District Municipality</option>
-                    <option value="28">Neringa Municipality</option>
-                    <option value="29">Pagėgiai municipality</option>
-                    <option value="30">Pakruojis District Municipality</option>
-                    <option value="31">Palanga City Municipality</option>
-                    <option value="32">Panevėžys City Municipality</option>
-                    <option value="PN">Panevėžys County</option>
-                    <option value="33">Panevėžys District Municipality</option>
-                    <option value="34">Pasvalys District Municipality</option>
-                    <option value="35">Plungė District Municipality</option>
-                    <option value="36">Prienai District Municipality</option>
-                    <option value="37">Radviliškis District Municipality</option>
-                    <option value="38">Raseiniai District Municipality</option>
-                    <option value="39">Rietavas municipality</option>
-                    <option value="40">Rokiškis District Municipality</option>
-                    <option value="41">Šakiai District Municipality</option>
-                    <option value="42">Šalčininkai District Municipality</option>
-                    <option value="43">Šiauliai City Municipality</option>
-                    <option value="SA">Šiauliai County</option>
-                    <option value="44">Šiauliai District Municipality</option>
-                    <option value="45">Šilalė District Municipality</option>
-                    <option value="46">Šilutė District Municipality</option>
-                    <option value="47">Širvintos District Municipality</option>
-                    <option value="48">Skuodas District Municipality</option>
-                    <option value="49">Švenčionys District Municipality</option>
-                    <option value="TA">Tauragė County</option>
-                    <option value="50">Tauragė District Municipality</option>
-                    <option value="TE">Telšiai County</option>
-                    <option value="51">Telšiai District Municipality</option>
-                    <option value="52">Trakai District Municipality</option>
-                    <option value="53">Ukmergė District Municipality</option>
-                    <option value="UT">Utena County</option>
-                    <option value="54">Utena District Municipality</option>
-                    <option value="55">Varėna District Municipality</option>
-                    <option value="56">Vilkaviškis District Municipality</option>
-                    <option value="57">Vilnius City Municipality</option>
-                    <option value="VL">Vilnius County</option>
-                    <option value="58">Vilnius District Municipality</option>
-                    <option value="59">Visaginas Municipality</option>
-                    <option value="60">Zarasai District Municipality</option>
-                </select>
-                <br><br>
-                <label for="">Additional comments</label>
-                <br>
-                <textarea name="comments" id="comments" cols="30" rows="5" placeholder="Enter text here..."></textarea>
-                <br><br>
-                <input class="firstB" type="submit" value="Create project" />
-            </form>
+                            ?>
+                            <div class="invalid-feedback">
+                                Please select teaching material
+                            </div>                            
+                        </div>
+                        <div class="input">
+                            <label for="ahours" class="form-label">Academic hours:</label> <br>
+                            <input name="ahours" type="number" class="form-control" placeholder="Enter academic hours" min="1" required/>
+                            <div class="invalid-feedback">
+                                Please enter academic hours
+                            </div>
+                        </div>
+                        <div class="input">
+                            <label for="sdate" class="form-label">Start date:</label> <br>
+                            <input type="date" class="form-control" id="sdate" name="sdate" required>
+                            <div class="invalid-feedback">
+                                Please select date
+                            </div>  
+                        </div>
+                        <div class="input">
+                            <label for="city" class="form-label">City:</label> <br>
+                            <select id="city" name="city" class="form-select" required>
+                            <option selected disabled value="">Select city</option>
+                            <option value="Akmenė District Municipality">Akmenė District Municipality</option>
+                            <option value="Alytus City Municipality">Alytus City Municipality</option>
+                            <option value="Alytus County">Alytus County</option>
+                            <option value="Alytus District Municipality">Alytus District Municipality</option>
+                            <option value="Birštonas Municipality">Birštonas Municipality</option>
+                            <option value="Biržai District Municipality">Biržai District Municipality</option>
+                            <option value="Druskininkai municipality">Druskininkai municipality</option>
+                            <option value="Elektrėnai municipality">Elektrėnai municipality</option>
+                            <option value="Ignalina District Municipality">Ignalina District Municipality</option>
+                            <option value="Jonava District Municipality">Jonava District Municipality</option>
+                            <option value="Joniškis District Municipality">Joniškis District Municipality</option>
+                            <option value="Jurbarkas District Municipality">Jurbarkas District Municipality</option>
+                            <option value="Kaišiadorys District Municipality">Kaišiadorys District Municipality</option>
+                            <option value="Kalvarija municipality">Kalvarija municipality</option>
+                            <option value="Kaunas City Municipality">Kaunas City Municipality</option>
+                            <option value="Kaunas County">Kaunas County</option>
+                            <option value="Kaunas District Municipality">Kaunas District Municipality</option>
+                            <option value="Kazlų Rūda municipality">Kazlų Rūda municipality</option>
+                            <option value="Kėdainiai District Municipality">Kėdainiai District Municipality</option>
+                            <option value="Kelmė District Municipality">Kelmė District Municipality</option>
+                            <option value="Klaipeda City Municipality">Klaipeda City Municipality</option>
+                            <option value="Klaipėda County">Klaipėda County</option>
+                            <option value="Klaipėda District Municipality">Klaipėda District Municipality</option>
+                            <option value="Kretinga District Municipality">Kretinga District Municipality</option>
+                            <option value="Kupiškis District Municipality">Kupiškis District Municipality</option>
+                            <option value="Lazdijai District Municipality">Lazdijai District Municipality</option>
+                            <option value="Marijampolė County">Marijampolė County</option>
+                            <option value="Marijampolė Municipality">Marijampolė Municipality</option>
+                            <option value="Mažeikiai District Municipality">Mažeikiai District Municipality</option>
+                            <option value="Molėtai District Municipality">Molėtai District Municipality</option>
+                            <option value="Neringa Municipality">Neringa Municipality</option>
+                            <option value="Pagėgiai municipality">Pagėgiai municipality</option>
+                            <option value="Pakruojis District Municipality">Pakruojis District Municipality</option>
+                            <option value="Palanga City Municipality">Palanga City Municipality</option>
+                            <option value="Panevėžys City Municipality">Panevėžys City Municipality</option>
+                            <option value="Panevėžys County">Panevėžys County</option>
+                            <option value="Panevėžys District Municipality">Panevėžys District Municipality</option>
+                            <option value="Pasvalys District Municipality">Pasvalys District Municipality</option>
+                            <option value="Plungė District Municipality">Plungė District Municipality</option>
+                            <option value="Prienai District Municipality">Prienai District Municipality</option>
+                            <option value="Radviliškis District Municipality">Radviliškis District Municipality</option>
+                            <option value="Raseiniai District Municipality">Raseiniai District Municipality</option>
+                            <option value="Rietavas municipality">Rietavas municipality</option>
+                            <option value="Rokiškis District Municipality">Rokiškis District Municipality</option>
+                            <option value="Šakiai District Municipality">Šakiai District Municipality</option>
+                            <option value="Šalčininkai District Municipality">Šalčininkai District Municipality</option>
+                            <option value="Šiauliai City Municipality">Šiauliai City Municipality</option>
+                            <option value="Šiauliai County">Šiauliai County</option>
+                            <option value="Šiauliai District Municipality">Šiauliai District Municipality</option>
+                            <option value="Šilalė District Municipality">Šilalė District Municipality</option>
+                            <option value="Šilutė District Municipality">Šilutė District Municipality</option>
+                            <option value="Širvintos District Municipality">Širvintos District Municipality</option>
+                            <option value="Skuodas District Municipality">Skuodas District Municipality</option>
+                            <option value="Švenčionys District Municipality">Švenčionys District Municipality</option>
+                            <option value="Tauragė County">Tauragė County</option>
+                            <option value="Tauragė District Municipality">Tauragė District Municipality</option>
+                            <option value="Telšiai County">Telšiai County</option>
+                            <option value="Telšiai District Municipality">Telšiai District Municipality</option>
+                            <option value="Trakai District Municipality">Trakai District Municipality</option>
+                            <option value="Ukmergė District Municipality">Ukmergė District Municipality</option>
+                            <option value="Utena County">Utena County</option>
+                            <option value="Utena District Municipality">Utena District Municipality</option>
+                            <option value="Varėna District Municipality">Varėna District Municipality</option>
+                            <option value="Vilkaviškis District Municipality">Vilkaviškis District Municipality</option>
+                            <option value="Vilnius City Municipality">Vilnius City Municipality</option>
+                            <option value="Vilnius County">Vilnius County</option>
+                            <option value="Vilnius District Municipality">Vilnius District Municipality</option>
+                            <option value="Visaginas Municipality">Visaginas Municipality</option>
+                            <option value="Zarasai District Municipality">Zarasai District Municipality</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select city
+                            </div>
+                        </div>
+                        <div class="input">
+                            <label for="" class="form-label">Additional comments</label> <br>
+                            <textarea name="comments" class="form-control" cols="30" rows="5" placeholder="Enter text here..."></textarea>
+                        </div>
+                        <input class="firstB" type="submit" value="Create project" />
+                    </form>
+                        
+                </div>
+            </div>            
         </div>
     </div>
     <hr id="footer-rule"> 
     <div class="footer"> 
     </div>  
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="../Scripts/Validation.js"></script>
 </body>
 </html>

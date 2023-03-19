@@ -9,7 +9,7 @@ var user_country_code = "LT";
             
                 const createCountryNamesDropdown = () => {
                     let option =  '';
-                    option += '<option value="">Select country</option>';
+                    option += '<option selected disabled value="">Select country</option>';
             
                     for(let country_code in country_array){
                         let selected = (country_code == user_country_code) ? ' selected' : '';
@@ -30,7 +30,7 @@ var user_country_code = "LT";
                     let option = '';
                     option += '<select id="state">';
                     option += '<select name="state">';
-                    option += '<option>Select state</option>';
+                    option += '<option selected disabled value="">Select state</option>';
                     for (let i = 0; i < state_names.length; i++) {
                         option += '<option value="'+state_names[i].name+'">'+state_names[i].name+'</option>';
                     }

@@ -82,93 +82,123 @@
         <div class="container-fluid">
             <div class="container h1 d-flex justify-content-center">Create new user</div>
                 <div class="container inputContainer">
-                    <form method="post" action="../Includes/NewUserAdd.php">
-                        <label for="fname">User's first name:</label> <br>
-                        <input type="text" id="fname" name="fname" placeholder="Enter user's first name" />
-                        <br><br>
-                        <label for="lname">User's last name:</label> <br>
-                        <input type="text" id="lname" name="lname" placeholder="Enter user's last name" />
-                        <br><br>
-                        <label for="sex">Select sex:</label> <br>
-                        <?php
-                            $sql = "SELECT id_SEX, name FROM SEX";
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <form method="post" action="../Includes/NewUserAdd.php" class="needs-validation" novalidate>
+                                <div class="input">
+                                    <label for="fname" class="form-label">First name:</label> <br>
+                                    <input type="text" class="form-control" name="fname" pattern="^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" placeholder="Enter user's first name" required/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid name
+                                    </div>
+                                </div>
+                                <div class="input">
+                                    <label for="lname" class="form-label">Last name:</label> <br>
+                                    <input type="text" class="form-control" name="lname" pattern="^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$" placeholder="Enter user's last name" required/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid last name 
+                                    </div>
+                                </div>
+                                <div class="input" >
+                                    <label for="sex" class="form-label">Sex:</label> <br>
+                                    <?php
+                                        $sql = "SELECT id_SEX, name FROM SEX";
 
-                            $result = $conn->query($sql) or die($conn->error);
+                                        $result = $conn->query($sql) or die($conn->error);
 
-                            echo "<select name='sex'>";
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='".$row['id_SEX']."'>".$row['name']."</option>";
-                            }
-                            echo "</select>";
-                        ?>
-                        <br><br>    
-                        <label for="birthdate">User's birthday:</label> <br>
-                        <input type="date" id="birthdate" name="bday">
-                        <br><br>
-                        <label for="pnumber">Phone number:</label> <br>
-                        <input type="tel" id="pnumber" name="pnumber" value="+370" />
-                        <br><br>
-                        <label for="email">Email:</label> <br>
-                        <input type="text" id="email" name="email" placeholder="example@email.com" />
-                        <br><br>
-                        <!-- <label for="city">City:</label> <br>
-                        <input type="text" id="city" placeholder="Enter users city" />
-                        <br> -->
+                                        echo "<select class='form-select' name='sex' required>";
+                                        echo '<option selected disabled value="">Select sex</option>';
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<option value='".$row['id_SEX']."'>".$row['name']."</option>";
+                                        }
+                                        echo "</select>";
+                                    ?>
+                                    <div class="invalid-feedback">
+                                        Please select sex
+                                    </div>  
+                                </div>
+                                <div class="input">
+                                    <label for="birthdate" class="form-label">Birthday:</label> <br>
+                                    <input type="date" class="form-control" name="bday" required>
+                                    <div class="invalid-feedback">
+                                        Please select birthday
+                                    </div>
+                                </div>
+                                <div class="input">
+                                    <label for="pnumber" class="form-label">Phone number:</label> <br>
+                                    <input type="tel" class="form-control" name="pnumber" pattern="[+][3][7][0][0-9]{8}" placeholder="+370********" required/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone number(+370********)
+                                    </div>
+                                </div>
+                                <div class="input">
+                                    <label for="email" class="form-label">Email:</label> <br>
+                                    <input type="text" class="form-control" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" placeholder="example@email.com" required/>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email
+                                    </div>
+                                </div>
+                                <div class="country-states">
+                                    <div class="input">
+                                        <label for="country" class="form-label">Country: </label> <br>
+                                        <select id="country" class="form-select" name="country">
+                                            <option>Select country</option>
+                                        </select>
+                                    </div>        
+                                    <div class="input">
+                                        <label for="state" class="form-label">State:</label> <br>
+                                        <select id="state" class="form-select" name="city" required>
+                                            <option selected disabled value="">Select city</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select city
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input">
+                                    <label for="role" class="form-label">Role:</label> <br>
+                                    <?php
+                                        $sql = "SELECT name FROM ROLE";
 
-                        <div class="country-states">
-                            <div>
-                                <label for="country">Country: </label>
-                                <br>
-                                <select id="country" name="country">
-                                    <option>Select country</option>
-                                </select>
-                            </div>
-                            <br>            
-                            <div>
-                                <label for="state">State:</label>
-                                <br>
-                                <select id="state" name="city">
-                                    <option>_</option>
-                                </select>
-                            </div>
+                                        $result = $conn->query($sql) or die($conn->error);
+
+                                        echo "<select name='role' class='form-select' id='role' required>";
+                                        echo '<option selected disabled value="">Select role</option>';
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<option value='".$row['name']."'>".$row['name']."</option>";
+                                        }
+                                        echo "</select>";
+                                    ?>
+                                    <div class="invalid-feedback">
+                                        Please select role
+                                    </div>
+                                </div>
+                                <div class=" input teach" id="teach">
+                                    <label for="qualification" class="form-label">Qualification:</label> <br>
+                                    <input type="text" class="form-control" name="qualification" placeholder="Enter qualification" />
+                                    <br>
+                                </div>
+                                <div class=" input stud" id="stud">
+                                    <label for="client" class="form-label">Client:</label> <br>
+                                    <?php
+                                    $sql = "SELECT id, name FROM CLIENT";
+
+                                    $result = $conn->query($sql) or die($conn->error);
+
+                                    echo "<select name='client' class='form-select'>";
+                                    echo "<option value='-'>-</option>";
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='".$row['id']."'>".$row['name']."</option>";
+                                    }
+                                    echo "</select>";
+                                    ?>
+                                    <br>
+                                </div>
+                                
+                                <input class="firstB" type="submit" value="Create user" />
+                            </form>
                         </div>
-                        <br>
-                        <label for="role">Select role:</label> <br>
-                        <?php
-                            $sql = "SELECT name FROM ROLE";
-
-                            $result = $conn->query($sql) or die($conn->error);
-
-                            echo "<select name='role' id='role'>";
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='".$row['name']."'>".$row['name']."</option>";
-                            }
-                            echo "</select>";
-                        ?>
-                        <br><br>
-                        <div class="teach" id="teach">
-                            <label for="qualification">Qualification:</label> <br>
-                            <input type="text" id="qualification" name="qualification" placeholder="Enter qualification" />
-                            <br><br>
-                        </div>
-                        <div class="stud" id="stud">
-                            <label for="client">Client:</label> <br>
-                            <?php
-                            $sql = "SELECT id, name FROM CLIENT";
-
-                            $result = $conn->query($sql) or die($conn->error);
-
-                            echo "<select name='client'>";
-                            echo "<option value='-'>-</option>";
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<option value='".$row['id']."'>".$row['name']."</option>";
-                            }
-                            echo "</select>";
-                            ?>
-                            <br><br>
-                        </div>
-                        <input class="firstB" type="submit" value="Create user" />
-                    </form> 
+                    </div>
                 </div>
         </div>
         <hr id="footer-rule"> 
@@ -176,8 +206,10 @@
         </div>
 
         <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="../Scripts/ShowHide.js"></script>
         <script src="../Scripts/CountriesCitiesDropdown.js"></script> 
+        <script src="../Scripts/Validation.js"></script>
 	</body>
 </html>
