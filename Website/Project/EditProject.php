@@ -86,242 +86,253 @@
     </nav>
     <div class="container-fluid">
         <div class="container h1 d-flex justify-content-center">Edit project</div>
-        <form action="SaveEditedProject.php?id=<?php echo $_GET['id']; ?>" method="post">
+        <form action="SaveEditedProject.php?id=<?php echo $_GET['id']; ?>" method="post" class="needs-validation" novalidate>
             <div class="container inputContainer">
                 <div class="row">
-                    <div class="col">
-                        <label for="pname">Project's name:</label> <br>
-                        <input name="title" type="text" id="pname" value="<?php echo $old_row['title'] ?>" />
-                        <br>
-                        <br>
-                        <label for="subject">Subject: </label>
-                        <br>
-                        <?php
+                    <div class="col-sm-12 col-md-6">
+                        <div class="col-md-10 col-lg-6">
+                            <div class="input">
+                                <label for="pname" class="form-label">Project:</label> <br>
+                                <input name="title" type="text" class="form-control" value="<?php echo $old_row['title'] ?>" required/>
+                                <div class="invalid-feedback">
+                                    Please provide a valid name
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label for="subject" class="form-label">Subject: </label>
+                                <br>
+                                <?php
 
-                        $sql = "SELECT id, name FROM QUALIFICATION ";
-                        $result = $conn->query($sql) or die($conn->error);
-                        echo '<select  name="fk_QUALIFICATION_id">';
-                        while ($tmp_row = mysqli_fetch_array($result)) {
+                                $sql = "SELECT id, name FROM QUALIFICATION ";
+                                $result = $conn->query($sql) or die($conn->error);
+                                echo '<select  name="fk_QUALIFICATION_id" class="form-select" required>';
+                                while ($tmp_row = mysqli_fetch_array($result)) {
 
-                            echo '<option ';
-                            if ($tmp_row['id'] == $old_row['fk_QUALIFICATION_id']) {
-                                echo "selected";
-                            }
-                            echo ' value="' . $tmp_row['id'] . '">' . $tmp_row['name'] . "</option>";
-                        }
-                        echo "</select>";
-
-                        ?>
-                        <br><br>
-                        <label for="">Assign manager:</label> <br>
-                        <?php
-                        $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
-                        $result = $conn->query($sql) or die($conn->error);
-
-                        echo '<select name="fk_MANAGER_id">';
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<option ';
-                            if ($row['id'] == $old_row['fk_MANAGER_id']) {
-                                echo "selected ";
-                            }
-                            echo  'value="' . $row['id'] . '">' . $row['fname'] . $row['surname'] .
-                                "</option>";
-                        }
-
-                        echo "</select>";
-
-                        ?>
-                        <br><br>
-                        <label for="">Teaching material: </label> <br>
-                        <?php
-
-                        $sql = "SELECT * FROM TEACHING_MATERIAL";
-                        $result = $conn->query($sql) or die($conn->error);
-
-                        echo "<select name='fk_TEACHING_MATERIAL_id'>";
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option ";
-                            if ($old_row['fk_TEACHING_MATERIAL_id'] == $row['id'])
-                                echo " selected ";
-                            echo "value=" . $row["id"] . ">" . $row['title'] . "</option>";
-                        }
-
-                        echo "</select>";
-                        ?>
-                        <br><br>
-                        <label for="city">City:</label> <br>
-                        <!-- <input type="text" id="city" name="city" placeholder="Enter city" /> -->
-
-                        <select id="city" name="city">
-                            <option value="">Select city</option>
-                            <option value="01">Akmenė District Municipality</option>
-                            <option value="02">Alytus City Municipality</option>
-                            <option value="AL">Alytus County</option>
-                            <option value="03">Alytus District Municipality</option>
-                            <option value="05">Birštonas Municipality</option>
-                            <option value="06">Biržai District Municipality</option>
-                            <option value="07">Druskininkai municipality</option>
-                            <option value="08">Elektrėnai municipality</option>
-                            <option value="09">Ignalina District Municipality</option>
-                            <option value="10">Jonava District Municipality</option>
-                            <option value="11">Joniškis District Municipality</option>
-                            <option value="12">Jurbarkas District Municipality</option>
-                            <option value="13">Kaišiadorys District Municipality</option>
-                            <option value="14">Kalvarija municipality</option>
-                            <option value="15">Kaunas City Municipality</option>
-                            <option value="KU">Kaunas County</option>
-                            <option value="16">Kaunas District Municipality</option>
-                            <option value="17">Kazlų Rūda municipality</option>
-                            <option value="18">Kėdainiai District Municipality</option>
-                            <option value="19">Kelmė District Municipality</option>
-                            <option value="20">Klaipeda City Municipality</option>
-                            <option value="KL">Klaipėda County</option>
-                            <option value="21">Klaipėda District Municipality</option>
-                            <option value="22">Kretinga District Municipality</option>
-                            <option value="23">Kupiškis District Municipality</option>
-                            <option value="24">Lazdijai District Municipality</option>
-                            <option value="MR">Marijampolė County</option>
-                            <option value="25">Marijampolė Municipality</option>
-                            <option value="26">Mažeikiai District Municipality</option>
-                            <option value="27">Molėtai District Municipality</option>
-                            <option value="28">Neringa Municipality</option>
-                            <option value="29">Pagėgiai municipality</option>
-                            <option value="30">Pakruojis District Municipality</option>
-                            <option value="31">Palanga City Municipality</option>
-                            <option value="32">Panevėžys City Municipality</option>
-                            <option value="PN">Panevėžys County</option>
-                            <option value="33">Panevėžys District Municipality</option>
-                            <option value="34">Pasvalys District Municipality</option>
-                            <option value="35">Plungė District Municipality</option>
-                            <option value="36">Prienai District Municipality</option>
-                            <option value="37">Radviliškis District Municipality</option>
-                            <option value="38">Raseiniai District Municipality</option>
-                            <option value="39">Rietavas municipality</option>
-                            <option value="40">Rokiškis District Municipality</option>
-                            <option value="41">Šakiai District Municipality</option>
-                            <option value="42">Šalčininkai District Municipality</option>
-                            <option value="43">Šiauliai City Municipality</option>
-                            <option value="SA">Šiauliai County</option>
-                            <option value="44">Šiauliai District Municipality</option>
-                            <option value="45">Šilalė District Municipality</option>
-                            <option value="46">Šilutė District Municipality</option>
-                            <option value="47">Širvintos District Municipality</option>
-                            <option value="48">Skuodas District Municipality</option>
-                            <option value="49">Švenčionys District Municipality</option>
-                            <option value="TA">Tauragė County</option>
-                            <option value="50">Tauragė District Municipality</option>
-                            <option value="TE">Telšiai County</option>
-                            <option value="51">Telšiai District Municipality</option>
-                            <option value="52">Trakai District Municipality</option>
-                            <option value="53">Ukmergė District Municipality</option>
-                            <option value="UT">Utena County</option>
-                            <option value="54">Utena District Municipality</option>
-                            <option value="55">Varėna District Municipality</option>
-                            <option value="56">Vilkaviškis District Municipality</option>
-                            <option value="57">Vilnius City Municipality</option>
-                            <option value="VL">Vilnius County</option>
-                            <option value="58">Vilnius District Municipality</option>
-                            <option value="59">Visaginas Municipality</option>
-                            <option value="60">Zarasai District Municipality</option>
-                        </select>
-                        <br><br>
-                        <label for="">Additional comments</label>
-                        <br>
-
-                        <textarea name="additional_info" id="comments" cols="30" rows="5"><?php echo $old_row['additional_info'] ?></textarea>
-                        
-                    </div>
-                    <div class="col">
-                        <label for="">Start date</label>
-                        <br>
-                        <?php
-
-                        echo '<input type="date" name="start_date"';
-                        if ($old_row['start_date'] != null) {
-                            echo 'value="' . $old_row['start_date'] . '"';
-                        }
-                        echo '>'
-                        ?>
-                        <br><br>
-                        <label for="">End date:</label>
-                        <br>
-                        <?php
-                        echo '<input type="date" name="end_date"';
-                        if ($old_row['end_date'] != null) {
-                            echo 'value="' . $old_row['end_date'] . '"';
-                        }
-                        echo '>'
-                        ?>
-                        <br><br>
-                        <label for="">Academic hours per project:</label>
-                        <br>
-                        <?php
-                        echo '<input type="number" name="academic_hours_per_project"';
-                        if ($old_row['academic_hours_per_project'] != null) {
-                            echo 'value="' . $old_row['academic_hours_per_project'] . '"';
-                        }
-                        echo ">"
-                        ?>
-                        <br><br>  
-                        <label for="">Academic hours(again?) per project:</label>
-                        <br>
-                        <?php
-                        echo '<input type="number" name="academic_hours_per_session"';
-                        if ($old_row['academic_hours_per_project'] != null) {
-                            echo 'value="' . $old_row['academic_hours_per_session'] . '"';
-                        }
-                        echo ">"
-                        ?>
-                        <br><br>
-                        <label for="">Project state:</label>
-                        <br>
-                        <select name="project_state" >
-                            <?php
-                            $query = "SELECT * FROM PROJECT_STATE";
-                            $result = $conn->query($query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option ';
-                                if($old_row['project_state'] == $row['id']) {
-                                    echo 'selected ';
+                                    echo '<option ';
+                                    if ($tmp_row['id'] == $old_row['fk_QUALIFICATION_id']) {
+                                        echo "selected";
+                                    }
+                                    echo ' value="' . $tmp_row['id'] . '">' . $tmp_row['name'] . "</option>";
                                 }
-                                echo 'value="' . $row['id'] . '">' . $row['name'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                        <br><br>
-                        <label for="">Classroom:</label>
-                        <br>
-                        <select name="fk_ROOM_id" >
-                            <?php
-                            $query = "SELECT * FROM ROOM";
-                            $result = $conn->query($query);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option ';
-                                if($old_row['fk_ROOM_id'] == $row['id'])
-                                    echo 'selected ';
-                                echo 'value="' . $row['id'] . '">' . $row['title'] . '</option>';
-                            }
-                            ?>
-                        </select>
+                                echo "</select>";
+
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Manager:</label> <br>
+                                <?php
+                                $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'manager'";
+                                $result = $conn->query($sql) or die($conn->error);
+
+                                echo '<select name="fk_MANAGER_id" class="form-select" required>';
+
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option ';
+                                    if ($row['id'] == $old_row['fk_MANAGER_id']) {
+                                        echo "selected ";
+                                    }
+                                    echo  'value="' . $row['id'] . '">' . $row['fname'] . $row['surname'] .
+                                        "</option>";
+                                }
+
+                                echo "</select>";
+
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Teaching material: </label> <br>
+                                <?php
+
+                                $sql = "SELECT * FROM TEACHING_MATERIAL";
+                                $result = $conn->query($sql) or die($conn->error);
+
+                                echo "<select name='fk_TEACHING_MATERIAL_id' class='form-select' required>";
+
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option ";
+                                    if ($old_row['fk_TEACHING_MATERIAL_id'] == $row['id'])
+                                        echo " selected ";
+                                    echo "value=" . $row["id"] . ">" . $row['title'] . "</option>";
+                                }
+
+                                echo "</select>";
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="city" class="form-label">City:</label> <br>
+                                <select id="city" name="city" class="form-select" required>
+                                <option selected disabled value="">Select city</option>
+                                <option value="Akmenė District Municipality">Akmenė District Municipality</option>
+                                <option value="Alytus City Municipality">Alytus City Municipality</option>
+                                <option value="Alytus County">Alytus County</option>
+                                <option value="Alytus District Municipality">Alytus District Municipality</option>
+                                <option value="Birštonas Municipality">Birštonas Municipality</option>
+                                <option value="Biržai District Municipality">Biržai District Municipality</option>
+                                <option value="Druskininkai municipality">Druskininkai municipality</option>
+                                <option value="Elektrėnai municipality">Elektrėnai municipality</option>
+                                <option value="Ignalina District Municipality">Ignalina District Municipality</option>
+                                <option value="Jonava District Municipality">Jonava District Municipality</option>
+                                <option value="Joniškis District Municipality">Joniškis District Municipality</option>
+                                <option value="Jurbarkas District Municipality">Jurbarkas District Municipality</option>
+                                <option value="Kaišiadorys District Municipality">Kaišiadorys District Municipality</option>
+                                <option value="Kalvarija municipality">Kalvarija municipality</option>
+                                <option value="Kaunas City Municipality">Kaunas City Municipality</option>
+                                <option value="Kaunas County">Kaunas County</option>
+                                <option value="Kaunas District Municipality">Kaunas District Municipality</option>
+                                <option value="Kazlų Rūda municipality">Kazlų Rūda municipality</option>
+                                <option value="Kėdainiai District Municipality">Kėdainiai District Municipality</option>
+                                <option value="Kelmė District Municipality">Kelmė District Municipality</option>
+                                <option value="Klaipeda City Municipality">Klaipeda City Municipality</option>
+                                <option value="Klaipėda County">Klaipėda County</option>
+                                <option value="Klaipėda District Municipality">Klaipėda District Municipality</option>
+                                <option value="Kretinga District Municipality">Kretinga District Municipality</option>
+                                <option value="Kupiškis District Municipality">Kupiškis District Municipality</option>
+                                <option value="Lazdijai District Municipality">Lazdijai District Municipality</option>
+                                <option value="Marijampolė County">Marijampolė County</option>
+                                <option value="Marijampolė Municipality">Marijampolė Municipality</option>
+                                <option value="Mažeikiai District Municipality">Mažeikiai District Municipality</option>
+                                <option value="Molėtai District Municipality">Molėtai District Municipality</option>
+                                <option value="Neringa Municipality">Neringa Municipality</option>
+                                <option value="Pagėgiai municipality">Pagėgiai municipality</option>
+                                <option value="Pakruojis District Municipality">Pakruojis District Municipality</option>
+                                <option value="Palanga City Municipality">Palanga City Municipality</option>
+                                <option value="Panevėžys City Municipality">Panevėžys City Municipality</option>
+                                <option value="Panevėžys County">Panevėžys County</option>
+                                <option value="Panevėžys District Municipality">Panevėžys District Municipality</option>
+                                <option value="Pasvalys District Municipality">Pasvalys District Municipality</option>
+                                <option value="Plungė District Municipality">Plungė District Municipality</option>
+                                <option value="Prienai District Municipality">Prienai District Municipality</option>
+                                <option value="Radviliškis District Municipality">Radviliškis District Municipality</option>
+                                <option value="Raseiniai District Municipality">Raseiniai District Municipality</option>
+                                <option value="Rietavas municipality">Rietavas municipality</option>
+                                <option value="Rokiškis District Municipality">Rokiškis District Municipality</option>
+                                <option value="Šakiai District Municipality">Šakiai District Municipality</option>
+                                <option value="Šalčininkai District Municipality">Šalčininkai District Municipality</option>
+                                <option value="Šiauliai City Municipality">Šiauliai City Municipality</option>
+                                <option value="Šiauliai County">Šiauliai County</option>
+                                <option value="Šiauliai District Municipality">Šiauliai District Municipality</option>
+                                <option value="Šilalė District Municipality">Šilalė District Municipality</option>
+                                <option value="Šilutė District Municipality">Šilutė District Municipality</option>
+                                <option value="Širvintos District Municipality">Širvintos District Municipality</option>
+                                <option value="Skuodas District Municipality">Skuodas District Municipality</option>
+                                <option value="Švenčionys District Municipality">Švenčionys District Municipality</option>
+                                <option value="Tauragė County">Tauragė County</option>
+                                <option value="Tauragė District Municipality">Tauragė District Municipality</option>
+                                <option value="Telšiai County">Telšiai County</option>
+                                <option value="Telšiai District Municipality">Telšiai District Municipality</option>
+                                <option value="Trakai District Municipality">Trakai District Municipality</option>
+                                <option value="Ukmergė District Municipality">Ukmergė District Municipality</option>
+                                <option value="Utena County">Utena County</option>
+                                <option value="Utena District Municipality">Utena District Municipality</option>
+                                <option value="Varėna District Municipality">Varėna District Municipality</option>
+                                <option value="Vilkaviškis District Municipality">Vilkaviškis District Municipality</option>
+                                <option value="Vilnius City Municipality">Vilnius City Municipality</option>
+                                <option value="Vilnius County">Vilnius County</option>
+                                <option value="Vilnius District Municipality">Vilnius District Municipality</option>
+                                <option value="Visaginas Municipality">Visaginas Municipality</option>
+                                <option value="Zarasai District Municipality">Zarasai District Municipality</option>
+                                </select>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Additional info</label> <br>
+                                <textarea name="additional_info" class="form-control" placeholder="Enter text here..." cols="30" rows="5"><?php echo $old_row['additional_info'] ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="col-md-10 col-lg-6">
+                            <div class="input">
+                                <label for="" class="form-label">Start date:</label> <br>
+                                <?php
+
+                                echo '<input type="date" class="form-control" name="start_date"';
+                                if ($old_row['start_date'] != null) {
+                                    echo 'value="' . $old_row['start_date'] . '"';
+                                }
+                                echo '>'
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">End date:</label> <br>
+                                <?php
+                                echo '<input type="date" class="form-control" name="end_date"';
+                                if ($old_row['end_date'] != null) {
+                                    echo 'value="' . $old_row['end_date'] . '"';
+                                }
+                                echo '>'
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Academic hours per project:</label> <br>
+                                <?php
+                                echo '<input type="number" class="form-control" name="academic_hours_per_project"';
+                                if ($old_row['academic_hours_per_project'] != null) {
+                                    echo 'value="' . $old_row['academic_hours_per_project'] . '"';
+                                }
+                                echo ">"
+                                ?>
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Academic hours(again?) per project:</label> <br>
+                                <?php
+                                echo '<input type="number" class="form-control" name="academic_hours_per_session"';
+                                if ($old_row['academic_hours_per_project'] != null) {
+                                    echo 'value="' . $old_row['academic_hours_per_session'] . '"';
+                                }
+                                echo "r>"
+                                ?>                                
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label">Project state:</label> <br>
+                                <select name="project_state" class="form-select">
+                                <?php
+                                $query = "SELECT * FROM PROJECT_STATE";
+                                $result = $conn->query($query);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option ';
+                                    if($old_row['project_state'] == $row['id']) {
+                                        echo 'selected ';
+                                    }
+                                    echo ' value="' . $row['id'] . '">' . $row['name'] . '</option>';
+                                }
+                                ?> 
+                                </select> 
+                            </div>
+                            <div class="input">
+                                <label for="" class="form-label" >Classroom:</label> <br>
+                                <select name="fk_ROOM_id" class="form-select">
+                                    <option selected disabled value="">Select classroom</option>;
+                                    <?php
+                                    $query = "SELECT * FROM ROOM";
+                                    $result = $conn->query($query);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<option ';
+                                        if($old_row['fk_ROOM_id'] == $row['id'])
+                                            echo 'selected ';
+                                        echo 'value="' . $row['id'] . '">' . $row['title'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>  
                     </div>
                 </div>
-                <br><br>                
+                <br><br>
                 <div class="row">
-                    <div class="col-3">
-                        <button><a href="./AcademicGroup.php">Academic group</a></button>  
+                    <div class="col-sm-6 col-md-3">
+                        <button class="btn btn-light formButton"><a href="./AcademicGroup.php">Academic group</a></button>  
                     </div>
-                    <div class="col-3">
-                        <button><a href="./Schedule/PlanSchedule.php">Plan schedule</a></button>
+                    <div class="col-sm-6 col-md-3">
+                        <button class="btn btn-light formButton"><a href="./Schedule/PlanSchedule.php">Plan schedule</a></button>
                     </div>
-                    <div class="col-3">
-                        <button>Discard</button>
+                    <div class="col-sm-6 col-md-3">
+                        <button class="btn btn-danger formButton">Discard</button>
                     </div>
-                    <div class="col-3">
-                        <input type="submit" value="Save changes" />
+                    <div class="col-sm-6 col-md-3">
+                        <input  class="btn btn-success formButton" type="submit" value="Save changes" />
                     </div>
                 </div>
+                
             </div>
         </form>
     </div>
@@ -330,8 +341,9 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    </body>
+    <script src="../Scripts/Validation.js"></script>
 </body>
 
 </html>
