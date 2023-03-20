@@ -89,7 +89,7 @@
                 <div class="inputContainer">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <label for="pname">Title:<?php echo $row['title'];?><label>
+                            <label for="pname">Title:<?php echo $row['title'];?></label>
                             <br>
                             <label for="subject">Subject:<?php echo $row['subject'];?></label>
                             <br><br>
