@@ -273,16 +273,6 @@
                                 ?>
                             </div>
                             <div class="input">
-                                <label for="" class="form-label">Academic hours(again?) per project:</label> <br>
-                                <?php
-                                echo '<input type="number" class="form-control" name="academic_hours_per_session"';
-                                if ($old_row['academic_hours_per_project'] != null) {
-                                    echo 'value="' . $old_row['academic_hours_per_session'] . '"';
-                                }
-                                echo "r>"
-                                ?>                                
-                            </div>
-                            <div class="input">
                                 <label for="" class="form-label">Project state:</label> <br>
                                 <select name="project_state" class="form-select">
                                 <?php
@@ -323,7 +313,7 @@
                         <button class="btn btn-light formButton"><a href="./AcademicGroup.php">Academic group</a></button>  
                     </div>
                     <div class="col-sm-6 col-md-3">
-                        <button class="btn btn-light formButton"><a href="./Schedule/PlanSchedule.php">Plan schedule</a></button>
+                        <button class="btn btn-light formButton"><a href="./Schedule/PlanSchedule.php?id=<?php echo $old_row['id'] ?>">Plan schedule</a></button>
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <button class="btn btn-danger formButton">Discard</button>
