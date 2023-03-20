@@ -1,6 +1,8 @@
 <?php
     include '../Includes/Connect.php';
     $updateId = $_GET['id'];
+
+    
     
     $query = "UPDATE MEMBER SET ";
     foreach ($_POST as $key => $value) {
