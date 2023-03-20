@@ -87,15 +87,14 @@ table, td, tr, th{
     padding: 5px 5px;
     margin: 5px 5px;
     font-size: 20px;
-    text-decoration: none;
-    font-family: Arial;
     color: var(--text-color);
 }
-button a {
+.formButton {
     font-size: 20px;
+    margin: 10px 10px !important;
+}
+button a {
     text-decoration: none;
-    font-family: Arial;
-    color: var(--text-color);
 }
 .buttons{
     margin: 20px 1%;
