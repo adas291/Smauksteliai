@@ -156,10 +156,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="input">
+                                <!--<div class="input">
                                     <label for="role" class="form-label">Role:</label> <br>
                                     <?php
-                                    $sql = "SELECT name FROM ROLE";
+                                    /*$sql = "SELECT name FROM ROLE";
 
                                     $result = $conn->query($sql) or die($conn->error);
 
@@ -169,7 +169,7 @@
                                         if ($row['name'] == $old_row['fk_ROLE_name']) echo 'selected ';      
                                         echo "value='" .$row['name']. "'>".$row['name']."</option>";
                                     }
-                                    echo "</select>";
+                                    echo "</select>";*/
                                     ?>
                                 </div>
                                 <div class=" input teach" id="teach">
@@ -180,7 +180,7 @@
                                 <div class=" input stud" id="stud">
                                     <label for="client" class="form-label">Client:</label> <br>
                                     <?php
-                                    $sql = "SELECT id, name FROM CLIENT";
+                                    /*$sql = "SELECT id, name FROM CLIENT";
 
                                     $result = $conn->query($sql) or die($conn->error);
 
@@ -191,10 +191,10 @@
                                         if ($row['id'] == $old_row['fk_CLIENT_id']) echo 'selected ';      
                                         echo "value='" .$row['id']. "'>".$row['name']."</option>";
                                     }
-                                    echo "</select>";
+                                    echo "</select>";*/
                                     ?>
                                     <br>
-                                </div>
+                                </div>-->
                                 
                                 <input class="firstB" type="submit" value="Save changes" />
                             </form>
