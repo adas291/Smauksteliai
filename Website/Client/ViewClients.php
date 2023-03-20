@@ -111,7 +111,7 @@
                                 '<td>' . $row['additional_info'] . '</td>' .
                                 '<td>' . $row['manager'] . '</td>' .
                                 '<td>' . $editLink . '</td>' .
-                                '<td><a href="RemoveUser.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
+                                '<td><a href="RemoveClient.php?id='. $row['id'] . '">' . $removeButton . '</a></td>' .
                                 '</tr>';
                         }
                         ?>
