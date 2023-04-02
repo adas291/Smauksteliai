@@ -247,7 +247,7 @@
                             <label for="" class="form-label">Additional comments</label> <br>
                             <textarea name="comments" class="form-control" cols="30" rows="5" placeholder="Enter text here..."></textarea>
                         </div>
-                        <input class="firstB" type="submit" value="Create project" />
+                        <input  class="btn btn-success formButton" type="submit" value="Create project" />
                     </form>
                         
                 </div>

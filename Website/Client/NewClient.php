@@ -113,7 +113,7 @@
                                     <label for="additional" class="form-label">Additional info:</label> <br>                                
                                     <textarea name="additional" class="form-control" id="additional" cols="30" rows="5" placeholder="Enter text here..."></textarea>
                                 </div>
-                                <input class="firstB" type="submit" value="Create client" />
+                                <input class="btn btn-success formButton" type="submit" value="Create client" />
                             </form>
                         </div>
                     </div>                    

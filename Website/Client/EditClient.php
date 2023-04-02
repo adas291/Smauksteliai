@@ -132,7 +132,14 @@
                             }
                             ?>
                         </div>                        
-                        <input class="firstB" type="submit" value="Save changes" />                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-danger formButton">Discard</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <input  class="btn btn-success formButton" type="submit" value="Save changes" />
+                            </div>
+                        </div>                        
                     </form>
 
                 </div>

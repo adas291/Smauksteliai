@@ -169,12 +169,12 @@
                         </div>
                     </div>
                     <div class="row justify-content-end">
-                    <div class="col-3">
-                        <button>Discard</button>
-                    </div>
-                    <div class="col-3">
-                        <input type="submit" value="Save changes" />
-                    </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-danger formButton">Discard</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <input  class="btn btn-success formButton" type="submit" value="Save changes" />
+                        </div>
                     </div>
                 </div>
         </div>

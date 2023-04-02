@@ -195,7 +195,7 @@
                                     <br>
                                 </div>
                                 
-                                <input class="firstB" type="submit" value="Create user" />
+                                <input class="btn btn-success formButton" type="submit" value="Create user" />
                             </form>
                         </div>
                     </div>
