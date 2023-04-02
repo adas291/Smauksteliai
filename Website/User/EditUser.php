@@ -156,6 +156,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                    if ($old_row['fk_ROLE_name'] == 'teacher') {
+                                        echo '<label for="role" class="form-label">role</label> <br>';
+                                    }
+                                ?>
                                 <!--<div class="input">
                                     <label for="role" class="form-label">Role:</label> <br>
                                     <?php
@@ -196,7 +201,14 @@
                                     <br>
                                 </div>-->
                                 
-                                <input class="firstB" type="submit" value="Save changes" />
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-danger formButton">Discard</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input  class="btn btn-success formButton" type="submit" value="Save changes" />
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
