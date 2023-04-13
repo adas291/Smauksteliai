@@ -116,23 +116,23 @@
                                     <label for="schedule">Schedule</label>
                                     <br>
                                     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="btncheck1">1</label>
+                                        <input type="checkbox" class="btn-check" id="1" autocomplete="off">
+                                        <label class="btn btn-outline-dark scheduleBtn" for="1">1</label>
 
-                                        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="btncheck2">2</label>
+                                        <input type="checkbox" class="btn-check" id="2" autocomplete="off">
+                                        <label class="btn btn-outline-dark scheduleBtn" for="2">2</label>
 
-                                        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="btncheck3">3</label>
+                                        <input type="checkbox" class="btn-check" id="3" autocomplete="off">
+                                        <label class="btn btn-outline-dark scheduleBtn" for="3">3</label>
 
-                                        <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="btncheck4">4</label>
+                                        <input type="checkbox" class="btn-check" id="4" autocomplete="off">
+                                        <label class="btn btn-outline-dark scheduleBtn" for="4">4</label>
 
-                                        <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="btncheck5">5</label>
+                                        <input type="checkbox" class="btn-check" id="5" autocomplete="off">
+                                        <label class="btn btn-outline-dark scheduleBtn" for="5">5</label>
                                     </div>
-                                    <input type="time">
-                                    <button class="plusBtn"> 
+                                    <input type="time" id="timeinput">
+                                    <button class="plusBtn" id="plusBtn"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                                         </svg>
@@ -154,11 +154,11 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td class="col-1"></td>
+                                                    <td class="col-2"></td>
+                                                    <td class="col-3"></td>
+                                                    <td class="col-4"></td>
+                                                    <td class="col-5"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -185,5 +185,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <script src="../../Scripts/TeacherSearch.js"></script>
+        <script src="../../Scripts/AddSchedule.js"></script>
 	</body>
 </html>
