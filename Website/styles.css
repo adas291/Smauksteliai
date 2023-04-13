@@ -64,25 +64,16 @@ table, td, tr, th{
     width: 100%;
     table-layout: fixed;
 }
-.calendarTable th,
+
 .calendarTable td {
     text-align: center;
     vertical-align: middle;
     height: 50px;
     padding: 5px;
 }
-.calendarTable td {
-    position: relative;
-}
-.calendarTable .scheduleBox {
-    border: 1px solid black !important;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
+    
+
+
 
 
 /* Images */
