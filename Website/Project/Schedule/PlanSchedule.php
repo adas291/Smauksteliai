@@ -10,11 +10,32 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <?php 
             include '../../Includes/Connect.php'; 
-            $query = "SELECT title, q.name as 'subject' FROM PROJECT ".
-                      "JOIN QUALIFICATION as q ON fk_QUALIFICATION_id = q.id"; 
-            
-            $result = $conn->query($query);
-            $row = mysqli_fetch_assoc($result);
+            $projectId = $_GET["id"];
+
+
+            $projectQuery = "SELECT p.fk_QUALIFICATION_id as 'subjectId',
+                p.fk_PROJECT_TEACHER_id as 'teacherId',
+                p.project_state as 'state',
+                p.title,
+                p.id,
+                p.teacher_state as 'teacherState',
+                q.name as 'subject',
+                q.id as 'subjectId'
+                FROM PROJECT p
+                LEFT JOIN `QUALIFICATION` q ON p.`fk_QUALIFICATION_id` = q.`id`
+                WHERE p.id = {$projectId};";
+
+            $result = $conn->query($projectQuery);
+            $projectRow = mysqli_fetch_assoc($result);
+
+            $teacherQuery = "SELECT t.id as 'teacherId', CONCAT(m.fname, ' ', m.surname) as 'teacherName' FROM TEACHER_QUALIFICATION tq
+                JOIN TEACHER t ON tq.fk_TEACHER_id = t.id
+                JOIN MEMBER m ON t.fk_MEMBER_id=m.id
+                JOIN QUALIFICATION q ON tq.fk_QUALIFICATION_id = q.id
+                WHERE q.id={$projectRow['subjectId']}"; 
+
+            $teacherList = $conn->query($teacherQuery);
+            // $teacherList = mysqli_fetch_assoc($teacherResult);
         ?>
 	</head>
 	<body>
@@ -23,11 +44,11 @@
             <img src="../../Images/Log.png" alt="logo" width="70" class="img d-inline-block align-top logoImg">
             <div class="container navigationBar justify-content-sm-end">                
                 <button type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#navbarNav" 
-                class="navbar-toggler" 
-                aria-controls="navbarNav" 
-                aria-expanded="false">
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" 
+                    class="navbar-toggler" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -86,90 +107,143 @@
         </nav>
         <div class="container-fluid">
             <div class="container h1 d-flex justify-content-center">Plan schedule</div>
-                <div class="inputContainer">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <label for="pname">Title:<?php echo $row['title'];?></label>
-                            <br>
-                            <label for="subject">Subject:<?php echo $row['subject'];?></label>
-                            <br><br>
-                            <label for="teacher">Pick a teacher:</label>
-                            <br>
-                            <input type="text" class="w-50" id="searchBar" placeholder="Search...">
-                            <div class="list border border-dark w-50">
-                                <?php
-                                    $sql = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'teacher'";
-                                    $result = $conn->query($sql) or die($conn->error);
-
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<div class="form-check">';
-                                        echo '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">';
-                                        echo '<label class="form-check-label" for="flexRadioDefault1" value="' . $row['id'] . '">' . $row['fname'] . " " . $row['surname'] . "</label>";
-                                        echo "</div>";
-                                    }
-                                ?>                                 
+                <form action="SaveProjectSchedule.php?id=<?php $projectId ?>" method="post">
+                    <div class="inputContainer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="pname">Title:<?php echo $projectRow['title'];?></label>
+                                <br>
+                                <label for="subject">Subject:<?php echo $projectRow['subject'];?></label>
+                                <br><br>
+    
+                                <label for="stateName">Project teacher state</label>
+                                <select name="selectState" id="selectState">
+                                    
+                                    <?php
+                                        $teacherStateQuery = "SELECT id, name FROM `TEACHER_STATE`"; 
+                                        $teacherStates = $conn->query($teacherStateQuery) or die($conn->error);
+    
+                                        while ($row = mysqli_fetch_assoc($teacherStates)) {
+                                            $state = "";
+                                            if($row['id']== $projectRow['teacherState'])
+                                            {
+                                                $state = "selected";
+                                            }
+                                            echo "<option value='{$row['teacherState']}' $state >{$row['name']}</option>";
+                                            // echo '<div class="form-check">';
+                                            // echo '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">';
+                                            // echo '<label class="form-check-label" for="flexRadioDefault1" ' . $state . ' value="' . $row['id'] . '">' . $row['fname'] . " " . $row['surname'] . "</label>";
+                                            // echo "</div>";
+                                        }
+    
+    
+                                    ?>                                 
+                                </select>
+    
+                                <br><br>
+                                <label for="teacher">Pick a teacher:</label>
+                                <br>
+                                <input type="text" class="w-50" id="searchBar" placeholder="Search...">
+                                <div class="list border border-dark w-50">
+                                    <?php
+                                        $sql1 = "SELECT id, fname, surname FROM MEMBER WHERE `fk_ROLE_name` = 'teacher'";
+                                        $sql2 = "SELECT fk_PROJECT_TEACHER_id FROM `PROJECT` WHERE id = {$projectId}";
+    
+                                        $result1 = $conn->query($sql1) or die($conn->error);
+                                        $prjectTeacher = $conn->query($sql2) or die($conn->error);
+                                        $hasTeacher = false;
+    
+                                        if(isset($prjectTeacher))
+                                        {
+                                            $hasTeacher = true;
+                                        }
+    
+                                        while ($row = mysqli_fetch_assoc($teacherList)) {
+    
+                                            $state = "";
+                                            if($hasTeacher && $row['id'] == $projectTeacher)
+                                            {
+                                                $state = "checked";
+                                            }
+    
+                                            echo '<div class="form-check">';
+                                            echo '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">';
+                                            echo '<label class="form-check-label" for="flexRadioDefault1" ' . $state . ' value="' . $row['teacherId'] . '" >' . "{$row['teacherName']}</label>";
+                                            echo "</div>";
+                                        }
+    
+    
+                                    ?>                                 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="row">
-                                <div class="container border-bottom border-2 border-dark">
-                                    <label for="schedule">Schedule</label>
-                                    <br>
-                                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                        <input type="checkbox" class="btn-check" id="1" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="1">1</label>
-
-                                        <input type="checkbox" class="btn-check" id="2" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="2">2</label>
-
-                                        <input type="checkbox" class="btn-check" id="3" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="3">3</label>
-
-                                        <input type="checkbox" class="btn-check" id="4" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="4">4</label>
-
-                                        <input type="checkbox" class="btn-check" id="5" autocomplete="off">
-                                        <label class="btn btn-outline-dark scheduleBtn" for="5">5</label>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row">
+                                    <div class="container border-bottom border-2 border-dark">
+                                        <label for="schedule">Schedule</label>
+                                        <br>
+                                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                            <input type="checkbox" class="btn-check" id="1" autocomplete="off">
+                                            <label class="btn btn-outline-dark scheduleBtn" for="1">1</label>
+    
+                                            <input type="checkbox" class="btn-check" id="2" autocomplete="off">
+                                            <label class="btn btn-outline-dark scheduleBtn" for="2">2</label>
+    
+                                            <input type="checkbox" class="btn-check" id="3" autocomplete="off">
+                                            <label class="btn btn-outline-dark scheduleBtn" for="3">3</label>
+    
+                                            <input type="checkbox" class="btn-check" id="4" autocomplete="off">
+                                            <label class="btn btn-outline-dark scheduleBtn" for="4">4</label>
+    
+                                            <input type="checkbox" class="btn-check" id="5" autocomplete="off">
+                                            <label class="btn btn-outline-dark scheduleBtn" for="5">5</label>
+                                        </div>
+                                        <input type="time" id="timeinput">
+                                        <button class="plusBtn" id="plusBtn" href="helloworld.lt"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>                              
+                                </div>
+                                <div class="row">
+                                    <div class="container calendar">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered calendarTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="h1">Mon</th>
+                                                        <th class="h1">Tue</th>
+                                                        <th class="h1">Wed</th>
+                                                        <th class="h1">Thu</th>
+                                                        <th class="h1">Fri</th>
+                                                    </tr>                                                
+                                                </thead>
+                                                    <tr>
+                                                        <?php Include "./ScheduleCode.php"; generateScheduleRows($projectId) ?> 
+                                                    </tr>
+                                                <tbody>
+                                                    <?php
+    
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+    
                                     </div>
-                                    <input type="time" id="timeinput">
-                                    <button class="plusBtn" id="plusBtn"> 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                        </svg>
-                                    </button>
-                                </div>                              
-                            </div>
-                            <div class="row">
-                                <div class="container calendar">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered calendarTable">
-                                            <thead>
-                                                <tr>
-                                                    <th class="h1">Mon</th>
-                                                    <th class="h1">Tue</th>
-                                                    <th class="h1">Wed</th>
-                                                    <th class="h1">Thu</th>
-                                                    <th class="h1">Fri</th>
-                                                </tr>                                                
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-sm-3">
-                            <button class="btn btn-danger formButton">Discard</button>
+                        <div class="row justify-content-end">
+                            <div class="col-sm-3">
+                                <button class="btn btn-danger formButton">Discard</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <input  class="btn btn-success formButton" type="submit" value="Save changes" />
+                            </div>
                         </div>
-                        <div class="col-sm-3">
-                            <input  class="btn btn-success formButton" type="submit" value="Save changes" />
-                        </div>
                     </div>
-                </div>
+            
+                </form>
         </div>
         <hr id="footer-rule"> 
         <div class="footer"> 
